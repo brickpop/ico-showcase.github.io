@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Upcoming from "../components/upcoming";
+import TopHeader from "../components/top-status";
 
 export default () => <div>
 	<Head>
@@ -9,9 +9,8 @@ export default () => <div>
 	</Head>
 
 	<style global jsx>{`
-		body {
-		}
+		body {}
 	`}</style>
 
-	<Upcoming />
+	<TopHeader />
 </div>

@@ -3,17 +3,14 @@ import React from 'react'
 export default class extends React.Component {
 	state = {};
 
-	componentDidMount() {
-		this.setState({ nom: "Jordi" });
-	}
-
 	render() {
 		return (
-			<div>
+			<div id="top-countdown">
 				<style jsx>{`
-					p#testing {color: blue;}
+					#top-countdown {
+					}
 				`}</style>
-				<p id="testing">Hello {this.state.nom || "world"}</p>
+				<p>TOKEN SALE COUNTDOWN</p>
 			</div>
 		)
 	}
