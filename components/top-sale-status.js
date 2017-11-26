@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
+// import ethTx from "eth-tx";
 
 export default class extends React.Component {
 	state = {};
 
 	componentDidMount(){
-
 	}
 
 	renderWeb3Ready(){
