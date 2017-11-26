@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import TopHeader from "../components/top-countdown";
+import Social from "../components/social";
 
 export default () => <div>
 	<Head>
@@ -13,4 +14,5 @@ export default () => <div>
 	`}</style>
 
 	<TopHeader />
+	<Social />
 </div>
