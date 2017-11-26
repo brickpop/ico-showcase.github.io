@@ -1,6 +1,17 @@
 import Head from 'next/head';
-import TopHeader from "../components/top-sale-status";
+import Header from "../components/header";
+import SaleStatus from "../components/top-sale-status";
 import Social from "../components/social";
+import Press from "../components/press";
+import ProjectInfo from "../components/project-info";
+import ProjectFeatures from "../components/project-features";
+import Roadmap from "../components/roadmap";
+import Testimonials from "../components/testimonials";
+import Specs from "../components/specs";
+import Team from "../components/team";
+import News from "../components/news";
+import HireMe from "../components/hire-me";
+import Footer from "../components/footer";
 
 export default () => <div>
 	<Head>
@@ -13,6 +24,17 @@ export default () => <div>
 		body {}
 	`}</style>
 
-	<TopHeader />
+	<Header/>
+	<SaleStatus />
 	<Social />
+	<Press />
+	<ProjectInfo />
+	<ProjectFeatures />
+	<Roadmap />
+	<Testimonials />
+	<Specs/>
+	<Team/>
+	<News/>
+	<HireMe/>
+	<Footer/>
 </div>
