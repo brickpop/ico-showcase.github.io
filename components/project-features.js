@@ -11,6 +11,12 @@ export default class extends React.Component {
 						padding: 50px 0;
 						background-color: #f9f9f9;
 					}
+					#project-features h5 {
+						margin-top: 20px;
+					}
+					#project-features p {
+						margin-bottom: 30px;
+					}
 				`}</style>
 				<div className="container">
 					<div className="row text-center">

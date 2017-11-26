@@ -10,8 +10,12 @@ export default class extends React.Component {
 					#social {
 						padding: 50px 0;
 					}
+					.input-group {
+						padding: 0 0 80px;
+					}
 				`}</style>
 				<div className="container">
+
 					<div className="row">
 						<div className="col-md-6 offset-md-3 col-sm-10 offset-sm-1">
 							<div className="input-group">

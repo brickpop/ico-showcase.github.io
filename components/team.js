@@ -10,6 +10,12 @@ export default class extends React.Component {
 					#team {
 						padding: 50px 0;
 					}
+					#team h3 {
+						margin: 20px 0 40px;
+					}
+					#team h5 {
+						margin-top: 20px;
+					}
 				`}</style>
 				<div className="container">
 

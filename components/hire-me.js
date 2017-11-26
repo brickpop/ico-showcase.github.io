@@ -11,6 +11,9 @@ export default class extends React.Component {
 						padding: 50px 0;
 						background-color: #f9f9f9;
 					}
+					#hire-me .btn.btn-lg {
+						margin-bottom: 30px;
+					}
 				`}</style>
 				<div className="container">
 

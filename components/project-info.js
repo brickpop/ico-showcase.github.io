@@ -13,11 +13,18 @@ export default class extends React.Component {
 					}
 					.btn.btn-lg.btn-outline-primary {
 						min-width: 70%;
+						margin: 50px 0;
+					}
+					#project-info-1 {
+
+					}
+					#project-info-2 {
+						padding: 50px 0;
 					}
 				`}</style>
 				<div className="container">
 
-					<div className="row">
+					<div id="project-info-1" className="row">
 						<div className="col-md-5">
 							<h3>Sample ICO</h3>
 							<p>This is how your project can look in a couple of months.</p>
@@ -31,7 +38,7 @@ export default class extends React.Component {
 						</div>
 					</div>
 
-					<div className="row">
+					<div id="project-info-2" className="row">
 						<div className="col-md-6">
 							<h3>What is Sample ICO?</h3>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>

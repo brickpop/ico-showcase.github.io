@@ -10,6 +10,15 @@ export default class extends React.Component {
 					#news {
 						padding: 50px 0;
 					}
+					#news h3 {
+						margin-bottom: 20px;
+					}
+					#news .item {
+						margin-top: 20px;
+					}
+					.btn.btn-sm {
+						width: 160px;
+					}
 					img.post-image {
 						max-width: 100%;
 					}
@@ -26,7 +35,7 @@ export default class extends React.Component {
 						<div className="col-md-6">
 							<h3>Recent</h3>
 
-							<div className="row">
+							<div className="item row">
 								<div className="post-image col-4">
 									<img src="http://via.placeholder.com/120x120" />
 								</div>
@@ -36,7 +45,7 @@ export default class extends React.Component {
 									<a href="#" className="btn btn-outline-primary btn-sm">Read more</a>
 								</div>
 							</div>
-							<div className="row">
+							<div className="item row">
 								<div className="post-image col-4">
 									<img src="http://via.placeholder.com/120x120" />
 								</div>
@@ -51,7 +60,7 @@ export default class extends React.Component {
 						<div className="col-md-6">
 							<h3>Upcoming</h3>
 
-							<div className="row">
+							<div className="item row">
 								<div className="col-3">
 									<div className="event-box">
 										<h6>14</h6>
@@ -66,7 +75,7 @@ export default class extends React.Component {
 								</div>
 							</div>
 
-							<div className="row">
+							<div className="item row">
 								<div className="col-3">
 									<div className="event-box">
 										<h6>14</h6>

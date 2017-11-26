@@ -10,6 +10,12 @@ export default class extends React.Component {
 					#testimonials {
 						padding: 50px 0;
 					}
+					#testimonials h3 {
+						margin-bottom: 20px;
+					}
+					#testimonials img {
+						margin-bottom: 20px;
+					}
 				`}</style>
 				<div className="container">
 
