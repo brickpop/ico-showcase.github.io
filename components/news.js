@@ -15,6 +15,7 @@ export default class extends React.Component {
 					}
 					#news .item {
 						margin-top: 20px;
+						margin-bottom: 40px;
 					}
 					.btn.btn-sm {
 						width: 160px;
@@ -37,7 +38,7 @@ export default class extends React.Component {
 
 							<div className="item row">
 								<div className="post-image col-4">
-									<img src="http://via.placeholder.com/120x120" />
+									<a href="#"><img src="http://via.placeholder.com/120x120" /></a>
 								</div>
 								<div className="col-8">
 									<h5>Post title goes here</h5>
@@ -47,7 +48,7 @@ export default class extends React.Component {
 							</div>
 							<div className="item row">
 								<div className="post-image col-4">
-									<img src="http://via.placeholder.com/120x120" />
+									<a href="#"><img src="http://via.placeholder.com/120x120" /></a>
 								</div>
 								<div className="col-8">
 									<h5>Post title goes here</h5>
@@ -64,8 +65,8 @@ export default class extends React.Component {
 								<div className="col-3">
 									<div className="event-box">
 										<h6>14</h6>
-										<h5>June</h5>
-										<h6>2017</h6>
+										<h5>Jun</h5>
+										<p>2017</p>
 									</div>
 								</div>
 								<div className="col-9">
@@ -78,9 +79,9 @@ export default class extends React.Component {
 							<div className="item row">
 								<div className="col-3">
 									<div className="event-box">
-										<h6>14</h6>
-										<h5>June</h5>
-										<h6>2017</h6>
+										<h6>17</h6>
+										<h5>Jun</h5>
+										<p>2017</p>
 									</div>
 								</div>
 								<div className="col-9">

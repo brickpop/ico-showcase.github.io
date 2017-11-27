@@ -16,7 +16,7 @@ export default class extends React.Component {
 
 					<div className="row text-center">
 						<div className="col">
-							<p><small><a href="#">White Paper</a> - <a href="#">The project</a> - <a href="#">FAQ</a> - <a href="#">Press</a> - <a href="#">Team</a></small></p>
+							<p><small><a href="#project-info">White Paper</a> - <a href="#project-info-2">The project</a> - <a href="#faq">FAQ</a> - <a href="#press">Press</a> - <a href="#team">Team</a></small></p>
 						</div>
 					</div>
 

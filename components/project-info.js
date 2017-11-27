@@ -32,7 +32,7 @@ export default class extends React.Component {
 							<p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
 						</div>
 						<div className="col-md-7 text-center">
-							<a href="#" className="btn btn-lg btn-outline-primary">Get the White Paper</a>
+							<a href="#" className="btn btn-lg btn-outline-primary">Read the White Paper</a>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 							<p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
 						</div>

@@ -1,21 +1,61 @@
 import React from 'react';
 // import ethTx from "eth-tx";
 
+const tokenSaleAddress = "0x123456789abcdef12345678";
+
 export default class extends React.Component {
 	state = {};
 
-	componentDidMount(){
+	componentDidMount() {
 	}
 
-	renderWeb3Ready(){
+	renderWeb3Ready() {
+		return <div id="web3-form" className="row">
+			<style jsx>{`
+				#web3-form {
+					padding: 20px 0;
+				}
+
+				.text-center.text-muted {
+					margin-top: 13px;
+				}
+				.btn {
+					cursor: pointer;
+				}
+			`}</style>
+
+			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+				<label>Token Sale address</label>
+				<div className="input-group">
+					<span className="input-group-addon">@</span>
+					<input type="text" readOnly={true} className="form-control" aria-label="Token Sale Address" value={tokenSaleAddress} />
+				</div>
+
+				{/* <p className="text-center text-muted">You currently have a balance of 100 Tokens</p> */}
+
+				<hr />
+
+				<div className="input-group">
+					<input type="text" className="form-control" placeholder="Your investment" aria-label="Your investment" />
+					<span className="input-group-btn">
+						<button className="btn btn-outline-info" type="button"><strong>$</strong> &darr;</button>
+					</span>
+					<span className="input-group-btn">
+						<button className="btn btn-success" type="button">Fund the project</button>
+					</span>
+				</div>
+				<p className="text-center text-muted">234.00 USD - 1.0234 ETH - 1234 Tokens</p>
+
+				<p className="text-center text-muted">You will be prompted to confirm the transaction</p>
+			</div>
+		</div>
+	}
+
+	renderChromeReady() {
 
 	}
 
-	renderChromeReady(){
-
-	}
-
-	renderNoWeb3(){
+	renderNoWeb3() {
 
 	}
 
@@ -52,6 +92,8 @@ export default class extends React.Component {
 							<p>Remaining</p>
 						</div>
 					</div>
+
+					{this.renderWeb3Ready()}
 
 				</div>
 

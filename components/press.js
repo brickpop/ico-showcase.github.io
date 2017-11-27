@@ -22,58 +22,58 @@ export default class extends React.Component {
 					</div>
 
 					<div className="row text-center">
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
-						<div className="col-2">
+						<div className="col-md-2 col-sm-4 col-6">
 							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
 						</div>
 					</div>

@@ -24,7 +24,7 @@ export default class extends React.Component {
 					</div>
 					<div className="row text-center">
 						<div className="col-md-8 offset-md-2">
-							<p>Do you like what you see? I am an experienced Senior Software Engineer and I can help you fund your next project. </p>
+							<p>Did you like it? I am an experienced Senior Software Engineer and I can help you fund your next project. </p>
 						</div>
 					</div>
 
