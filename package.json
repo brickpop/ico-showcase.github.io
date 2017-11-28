@@ -19,9 +19,9 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/ledfusion/sample-token-sale#readme",
   "dependencies": {
-    "eth-tx": "^0.9.4",
+    "eth-tx": "^0.9.5",
     "next": "^4.1.4",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
-	}
+  }
 }

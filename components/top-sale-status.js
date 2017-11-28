@@ -1,5 +1,5 @@
 import React from 'react';
-// import ethTx from "eth-tx";
+import ethTx from "eth-tx";
 
 const tokenSaleAddress = "0x123456789abcdef12345678";
 
