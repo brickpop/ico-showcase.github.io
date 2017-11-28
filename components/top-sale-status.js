@@ -1,5 +1,4 @@
 import React from 'react';
-import ethTx from "eth-tx";
 
 const tokenSaleAddress = "0x123456789abcdef12345678";
 
@@ -7,6 +6,9 @@ export default class extends React.Component {
 	state = {};
 
 	componentDidMount() {
+		ethTx.connect().then(() => {
+			this.setState({connected: true});
+		});
 	}
 
 	renderWeb3Ready() {
@@ -94,6 +96,9 @@ export default class extends React.Component {
 					</div>
 
 					{this.renderWeb3Ready()}
+
+
+					<p className="text-center text-muted">{this.state.connected ? "Connected" : "Unavailable"}</p>
 
 				</div>
 
