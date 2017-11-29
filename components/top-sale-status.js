@@ -1,5 +1,5 @@
 import React from 'react';
-// import Web3 from "web3";
+import Web3Wrap from "web3-wrap";
 import { HashStore } from "../assets/contracts.js";
 
 const tokenSaleAddress = "0x8af4943ED2744c229976D94045854dc5e374479a";
@@ -11,25 +11,17 @@ export default class extends React.Component {
 	};
 
 	componentDidMount() {
-		// window.w3 = new Web3(web3.currentProvider);
-		// window.HashStore = HashStore;
-		// window.w3 = new Web3("http://localhost:8545");
-		// Contract = new w3.eth.Contract(HashStore.abi, "0x8af4943ED2744c229976D94045854dc5e374479a")
-		// Contract.deploy({data: HashStore.byteCode, arguments: ["0x1234"]}).send({from: "0xE18D8EB2b5d0d141908A7eBF672DC77D8681902b"})
-
-		this.HashStoreContract = ethTx.wrapContract(HashStore.abi, HashStore.byteCode);
-
-		ethTx.onConnectionChanged(status => this.connectionChanged(status));
+		Web3Wrap.addConnectionChangedListener(status => this.connectionChanged(status));
+		// 	this.HashStoreContract = Web3Wrap.wrapContract(HashStore.abi, HashStore.byteCode);
 
 		this.connect().then(accounts => {
-			this.setState({ accounts });
+			this.setState({ connected: true, accounts });
 
-			if (accounts && accounts.length) this.setState({ status: "Web3 has been loaded" });
-			else throw new Error("Please, unlock your wallet or create an account");
+			if (!accounts || !accounts.length) throw new Error("Please, unlock your wallet or create an account");
 
-			return ethTx.getNetwork();
+			return Web3Wrap.getNetwork();
 		}).then(name => {
-			this.setState({ connected: true, network: name, loading: false });
+			this.setState({ network: name, loading: false });
 
 			if (name != "ropsten")
 				throw new Error("Please, switch to the Ropsten network");
@@ -48,12 +40,11 @@ export default class extends React.Component {
 
 	connect() {
 		if (typeof window.web3 !== "undefined") {
-			return ethTx.useConnection(window.web3);
+			return Web3Wrap.useConnection(window.web3);
 		} else if (location.protocol == "file:") {
 			throw new Error("Can't connect to the Ethereum net from a local file://");
 		} else {
-			return ethTx.connect().catch(err => {
-				this.setState({ unsupported: true });
+			return Web3Wrap.connect().catch(err => {
 				if (err && err.message.match(/Invalid JSON RPC response/))
 					throw new Error("You are using an unsupported browser or your connection is down");
 				else throw err;
@@ -61,25 +52,25 @@ export default class extends React.Component {
 		}
 	}
 
-	attachToContract() {
-		if (!this.hashStoreInstance) {
-			this.hashStoreInstance = new this.HashStoreContract(tokenSaleAddress);
-		}
-	}
+	// attachToContract() {
+	// 	if (!this.hashStoreInstance) {
+	// 		this.hashStoreInstance = new this.HashStoreContract(tokenSaleAddress);
+	// 	}
+	// }
 
 	updateSaleStatus() {
-		this.attachToContract();
+		// 	this.attachToContract();
 
-		return this.hashStoreInstance
-			.getHash()
-			.call()
-			.then(hash => {
-				this.setState({ status: "Current Hash: " + hash });
-			})
-			.catch(err => {
-				alert(err.message);
-				// setStatus(err.message);
-			});
+		// 	return this.hashStoreInstance
+		// 		.getHash()
+		// 		.call()
+		// 		.then(hash => {
+		// 			this.setState({ status: "Current Hash: " + hash });
+		// 		})
+		// 		.catch(err => {
+		// 			alert(err.message);
+		// 			// setStatus(err.message);
+		// 		});
 	}
 
 	connectionChanged(status) {
@@ -95,29 +86,29 @@ export default class extends React.Component {
 		else this.setState({ status: "Please, unlock your wallet or create an account" });
 	}
 
-	submit() {
-		this.attachToContract();
-		debugger;
-		const hash = "0x1234";
+	// submit() {
+	// 	this.attachToContract();
+	// 	debugger;
+	// 	const hash = "0x1234";
 
-		return ethTx.getNetwork()
-			.then(name => {
-				if (name != "ropsten")
-					throw new Error("Please, switch to the Ropsten network");
+	// 	return Web3Wrap.getNetwork()
+	// 		.then(name => {
+	// 			if (name != "ropsten")
+	// 				throw new Error("Please, switch to the Ropsten network");
 
-				return this.hashStoreInstance.setHash(hash).send({});
-			})
-			.then(result => {
-				console.log(result);
-				this.setState({ status: "Updated the hash to " + hash });
+	// 			return this.hashStoreInstance.setHash(hash).send({});
+	// 		})
+	// 		.then(result => {
+	// 			console.log(result);
+	// 			this.setState({ status: "Updated the hash to " + hash });
 
-				return updateStatus();
-			})
-			.catch(err => {
-				alert(err.message);
-			});
+	// 			return updateStatus();
+	// 		})
+	// 		.catch(err => {
+	// 			alert(err.message);
+	// 		});
 
-	}
+	// }
 
 	renderWeb3Ready() {
 		return <div id="web3-form" className="row">
@@ -202,6 +193,10 @@ export default class extends React.Component {
 		</div>
 	}
 
+	renderUnlockWallet(){
+		return <p className="text-center">Please, unlock your wallet</p>;
+	}
+
 	renderNoWeb3() {
 		return <div id="web3-missing" className="row">
 			<style jsx>{`
@@ -241,11 +236,11 @@ export default class extends React.Component {
 		</div>
 	}
 
-	fundingSection(){
-		if(this.state.loading) return <div/>;
-		else if(!this.state.connected) return this.renderNoWeb3();
-		else if(window && !!window.chrome) return this.renderWeb3Ready()
-		// else if(!this.state.accounts || !this.state.accounts.length) return this.renderWeb3Ready()
+	fundingSection() {
+		if (this.state.loading) return <div />;
+		else if (!this.state.connected) return this.renderNoWeb3();
+		else if(!this.state.accounts || !this.state.accounts.length) return this.renderUnlockWallet();
+		else if (window && !!window.chrome) return this.renderWeb3Ready()
 		else return this.renderWeb3Ready()
 	}
 
