@@ -1,8 +1,8 @@
 import React from 'react';
-import Web3Wrap from "web3-wrap";
+import * as Web3Wrap from "web3-wrap";
 import { HashStore } from "../assets/contracts.js";
 
-const tokenSaleAddress = "0x8af4943ED2744c229976D94045854dc5e374479a";
+const tokenSaleAddress = "0x03f3fE224F6c4eB3437b273fB682326034A69EfD";
 
 export default class extends React.Component {
 	state = {
@@ -11,8 +11,9 @@ export default class extends React.Component {
 	};
 
 	componentDidMount() {
-		Web3Wrap.addConnectionChangedListener(status => this.connectionChanged(status));
-		// 	this.HashStoreContract = Web3Wrap.wrapContract(HashStore.abi, HashStore.byteCode);
+		Web3Wrap.onConnectionChanged(status => this.connectionChanged(status));
+
+		this.HashStoreContract = Web3Wrap.wrapContract(HashStore.abi, HashStore.byteCode);
 
 		this.connect().then(accounts => {
 			this.setState({ connected: true, accounts });
@@ -52,25 +53,24 @@ export default class extends React.Component {
 		}
 	}
 
-	// attachToContract() {
-	// 	if (!this.hashStoreInstance) {
-	// 		this.hashStoreInstance = new this.HashStoreContract(tokenSaleAddress);
-	// 	}
-	// }
+	attachToContract() {
+		if (!this.hashStoreInstance) {
+			this.hashStoreInstance = this.HashStoreContract.attach(tokenSaleAddress);
+		}
+	}
 
 	updateSaleStatus() {
-		// 	this.attachToContract();
+			this.attachToContract();
 
-		// 	return this.hashStoreInstance
-		// 		.getHash()
-		// 		.call()
-		// 		.then(hash => {
-		// 			this.setState({ status: "Current Hash: " + hash });
-		// 		})
-		// 		.catch(err => {
-		// 			alert(err.message);
-		// 			// setStatus(err.message);
-		// 		});
+			return this.hashStoreInstance
+				.getHash()
+				.then(hash => {
+					this.setState({ status: "Current Hash: " + hash });
+				})
+				.catch(err => {
+					// alert(err.message);
+					// setStatus(err.message);
+				});
 	}
 
 	connectionChanged(status) {
@@ -193,7 +193,7 @@ export default class extends React.Component {
 		</div>
 	}
 
-	renderUnlockWallet(){
+	renderUnlockWallet() {
 		return <p className="text-center">Please, unlock your wallet</p>;
 	}
 
@@ -239,7 +239,7 @@ export default class extends React.Component {
 	fundingSection() {
 		if (this.state.loading) return <div />;
 		else if (!this.state.connected) return this.renderNoWeb3();
-		else if(!this.state.accounts || !this.state.accounts.length) return this.renderUnlockWallet();
+		else if (!this.state.accounts || !this.state.accounts.length) return this.renderUnlockWallet();
 		else if (window && !!window.chrome) return this.renderWeb3Ready()
 		else return this.renderWeb3Ready()
 	}
