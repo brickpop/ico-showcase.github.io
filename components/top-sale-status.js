@@ -1,16 +1,28 @@
 import React from 'react';
 import * as Web3Wrap from "web3-wrap";
 import { HashStore } from "../assets/contracts.js";
+import { getEthUsdRate } from "../lib/api";
 
 const tokenSaleAddress = "0x03f3fE224F6c4eB3437b273fB682326034A69EfD";
+const targetNetwork = "ropsten";
+const ethTokenRate = 100;
 
 export default class extends React.Component {
 	state = {
 		status: "(Please wait)",
-		loading: true
+		loading: true,
+		investingValue: 0,
+		inputCurrency: "ETH",
+
+		ethUsdRate: 458, // default
+
+		// accounts
+		// connected
+		// network
 	};
 
 	componentDidMount() {
+		getEthUsdRate().then(rate => this.setState({ ethUsdRate: rate }));
 		Web3Wrap.onConnectionChanged(status => this.connectionChanged(status));
 
 		this.HashStoreContract = Web3Wrap.wrapContract(HashStore.abi, HashStore.byteCode);
@@ -24,8 +36,8 @@ export default class extends React.Component {
 		}).then(name => {
 			this.setState({ network: name, loading: false });
 
-			if (name != "ropsten")
-				throw new Error("Please, switch to the Ropsten network");
+			if (name != targetNetwork)
+				throw new Error(`Please, switch to the ${targetNetwork} network`);
 
 			this.updateInterval = setInterval(() => this.updateSaleStatus(), 3000);
 			return this.updateSaleStatus();
@@ -60,17 +72,17 @@ export default class extends React.Component {
 	}
 
 	updateSaleStatus() {
-			this.attachToContract();
+		this.attachToContract();
 
-			return this.hashStoreInstance
-				.getHash()
-				.then(hash => {
-					this.setState({ status: "Current Hash: " + hash });
-				})
-				.catch(err => {
-					// alert(err.message);
-					// setStatus(err.message);
-				});
+		return this.hashStoreInstance
+			.getHash()
+			.then(hash => {
+				this.setState({ status: "Current Hash: " + hash });
+			})
+			.catch(err => {
+				// alert(err.message);
+				// setStatus(err.message);
+			});
 	}
 
 	connectionChanged(status) {
@@ -86,31 +98,59 @@ export default class extends React.Component {
 		else this.setState({ status: "Please, unlock your wallet or create an account" });
 	}
 
-	// submit() {
-	// 	this.attachToContract();
-	// 	debugger;
-	// 	const hash = "0x1234";
+	investingValueChanged(ev) {
+		const val = parseFloat(ev.target.value) || 0;
+		this.setState({ investingValue: val })
+	}
 
-	// 	return Web3Wrap.getNetwork()
-	// 		.then(name => {
-	// 			if (name != "ropsten")
-	// 				throw new Error("Please, switch to the Ropsten network");
+	shiftCurrency() {
+		if (this.state.inputCurrency == "ETH") this.setState({ inputCurrency: "USD" });
+		else if (this.state.inputCurrency == "USD") this.setState({ inputCurrency: "Tokens" });
+		else this.setState({ inputCurrency: "ETH" });
+	}
 
-	// 			return this.hashStoreInstance.setHash(hash).send({});
-	// 		})
-	// 		.then(result => {
-	// 			console.log(result);
-	// 			this.setState({ status: "Updated the hash to " + hash });
+	submit() {
+		this.attachToContract();
+		// 	debugger;
+		// 	const hash = "0x1234";
 
-	// 			return updateStatus();
-	// 		})
-	// 		.catch(err => {
-	// 			alert(err.message);
-	// 		});
+		// 	return Web3Wrap.getNetwork()
+		// 		.then(name => {
+		// 			if (name != "ropsten")
+		// 				throw new Error("Please, switch to the Ropsten network");
 
-	// }
+		// 			return this.hashStoreInstance.setHash(hash).send({});
+		// 		})
+		// 		.then(result => {
+		// 			console.log(result);
+		// 			this.setState({ status: "Updated the hash to " + hash });
+
+		// 			return updateStatus();
+		// 		})
+		// 		.catch(err => {
+		// 			alert(err.message);
+		// 		});
+
+	}
 
 	renderWeb3Ready() {
+		var usdNumber, ethNumber, tokenNumber;
+		if (this.state.inputCurrency == "ETH") {
+			usdNumber = (this.state.investingValue * this.state.ethUsdRate || 0).toFixed(2);
+			ethNumber = (this.state.investingValue || 0).toFixed(2);
+			tokenNumber = (this.state.investingValue * ethTokenRate || 0).toFixed(2);
+		}
+		else if (this.state.inputCurrency == "USD") {
+			usdNumber = (this.state.investingValue || 0).toFixed(2);
+			ethNumber = ((this.state.investingValue / this.state.ethUsdRate) || 0).toFixed(2);
+			tokenNumber = ((this.state.investingValue / this.state.ethUsdRate) * ethTokenRate || 0).toFixed(2);
+		}
+		else { // TOKEN
+			usdNumber = (((this.state.investingValue / ethTokenRate) * this.state.ethUsdRate) || 0).toFixed(2);
+			ethNumber = ((this.state.investingValue / ethTokenRate) || 0).toFixed(2);
+			tokenNumber = (this.state.investingValue || 0).toFixed(2);
+		}
+
 		return <div id="web3-form" className="row">
 			<style jsx>{`
 				#web3-form {
@@ -123,6 +163,9 @@ export default class extends React.Component {
 				}
 				.btn {
 					cursor: pointer;
+				}
+				.selected-currency {
+					color: green;
 				}
 			`}</style>
 
@@ -138,15 +181,21 @@ export default class extends React.Component {
 				<hr />
 
 				<div className="input-group">
-					<input type="text" className="form-control" placeholder="Your investment" aria-label="Your investment" />
+					<input type="text" className="form-control" placeholder="Your investment" aria-label="Your investment" onChange={ev => this.investingValueChanged(ev)} />
 					<span className="input-group-btn">
-						<button className="btn btn-outline-info" type="button"><strong>$</strong> &darr;</button>
+						<button className="btn btn-outline-info" type="button" onClick={() => this.shiftCurrency()}>{this.state.inputCurrency}</button>
 					</span>
 					<span className="input-group-btn">
 						<button className="btn btn-success" type="button" onClick={() => this.submit()}>Fund the project</button>
 					</span>
 				</div>
-				<p className="text-center text-muted">234.00 USD - 1.0234 ETH - 1234 Tokens</p>
+				<p className="text-center text-muted">
+					{this.state.inputCurrency == "ETH" ? <strong className="selected-currency">{ethNumber} ETH</strong> : <span>{ethNumber} ETH</span>}
+					&nbsp;-&nbsp;
+					{this.state.inputCurrency == "USD" ? <strong className="selected-currency">{usdNumber} USD</strong> : <span>{usdNumber} USD</span>}
+					&nbsp;-&nbsp;
+					{this.state.inputCurrency == "Tokens" ? <strong className="selected-currency">{tokenNumber} Tokens</strong> : <span>{tokenNumber} Tokens</span>}
+				</p>
 
 				<p className="text-center text-muted">You will be prompted to confirm the transaction</p>
 			</div>
