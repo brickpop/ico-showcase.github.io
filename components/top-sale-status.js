@@ -1,5 +1,7 @@
 import React from 'react';
 import * as Web3Wrap from "web3-wrap";
+import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 import { HashStore } from "../assets/contracts.js";
 import { getEthUsdRate } from "../lib/api";
 
@@ -15,6 +17,8 @@ export default class extends React.Component {
 		inputCurrency: "ETH",
 
 		ethUsdRate: 458, // default
+
+		currencyDropDownOpen: false
 
 		// accounts
 		// connected
@@ -180,15 +184,22 @@ export default class extends React.Component {
 
 				<hr />
 
-				<div className="input-group">
-					<input type="text" className="form-control" placeholder="Your investment" aria-label="Your investment" onChange={ev => this.investingValueChanged(ev)} />
-					<span className="input-group-btn">
-						<button className="btn btn-outline-info" type="button" onClick={() => this.shiftCurrency()}>{this.state.inputCurrency}</button>
-					</span>
-					<span className="input-group-btn">
-						<button className="btn btn-success" type="button" onClick={() => this.submit()}>Fund the project</button>
-					</span>
-				</div>
+				<InputGroup>
+					<InputGroupButton>
+						<ButtonDropdown isOpen={this.state.currencyDropDownOpen} toggle={() => this.setState({currencyDropDownOpen: !this.state.currencyDropDownOpen})}>
+							<DropdownToggle caret color="info" outline> {this.state.inputCurrency} </DropdownToggle>
+							<DropdownMenu>
+								<DropdownItem header>Input currency</DropdownItem>
+								<DropdownItem onClick={() => this.setState({inputCurrency: "ETH"})}>Ether</DropdownItem>
+								<DropdownItem onClick={() => this.setState({inputCurrency: "USD"})}>U.S. Dollar</DropdownItem>
+								<DropdownItem onClick={() => this.setState({inputCurrency: "Tokens"})}>Tokens</DropdownItem>
+							</DropdownMenu>
+						</ButtonDropdown>
+					</InputGroupButton>
+					<Input placeholder="Your investment" onChange={ev => this.investingValueChanged(ev)} />
+					<InputGroupButton><Button color="success" onClick={() => this.submit()}>Fund the project</Button></InputGroupButton>
+				</InputGroup>
+
 				<p className="text-center text-muted">
 					{this.state.inputCurrency == "ETH" ? <strong className="selected-currency">{ethNumber} ETH</strong> : <span>{ethNumber} ETH</span>}
 					&nbsp;-&nbsp;
@@ -243,7 +254,25 @@ export default class extends React.Component {
 	}
 
 	renderUnlockWallet() {
-		return <p className="text-center">Please, unlock your wallet</p>;
+		return <div id="web3-locked" className="row">
+			<style jsx>{`
+				#web3-locked {
+					padding: 20px 0;
+					background-color: #fef9ec
+				}
+			`}</style>
+
+			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
+				<label>Token Sale address</label>
+				<div className="input-group">
+					<span className="input-group-addon">@</span>
+					<input type="text" readOnly={true} className="form-control" aria-label="Token Sale Address" value={tokenSaleAddress} />
+				</div>
+
+				<hr />
+				<h6>Please, unlock your wallet to continue</h6>
+			</div>
+		</div>
 	}
 
 	renderNoWeb3() {
