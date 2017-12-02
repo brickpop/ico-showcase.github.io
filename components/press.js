@@ -8,7 +8,7 @@ export default class extends React.Component {
 			<div id="press">
 				<style jsx>{`
 					#press .row.text-center img {
-						padding: 50px 0;
+						padding: 30px 0;
 						max-width: 100%;
 						margin-bottom: 15px;
 					}
@@ -22,59 +22,53 @@ export default class extends React.Component {
 					</div>
 
 					<div className="row text-center">
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
-						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
-						</div>
-						<div className="col-md-2 col-sm-4 col-6">
-							<a href="#"><img src="http://via.placeholder.com/150x80" /></a>
+						<div className="col-md-3 col-sm-4 col-6">
+							<a href="#"><img src="http://placehold.it/180x70/f7f7f7/444/?text=I+am+a+blog" /></a>
 						</div>
 					</div>
 				</div>
