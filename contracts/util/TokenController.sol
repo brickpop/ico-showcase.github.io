@@ -1,11 +1,11 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.18;
 
 /// @dev The token controller contract must implement these functions
 contract TokenController {
     /// @notice Called when `_owner` sends ether to the MiniMe Token contract
     /// @param _owner The address that sent the ether to create tokens
     /// @return True if the ether is accepted, false if it throws
-    function proxyPayment(address _owner) payable public returns(bool);
+    function proxyPayment(address _owner) public payable returns(bool);
 
     /// @notice Notifies the controller about a token transfer allowing the
     ///  controller to react if desired
@@ -21,6 +21,5 @@ contract TokenController {
     /// @param _spender The spender in the `approve()` call
     /// @param _amount The amount in the `approve()` call
     /// @return False if the controller does not authorize the approval
-    function onApprove(address _owner, address _spender, uint _amount)
-        public returns(bool);
+    function onApprove(address _owner, address _spender, uint _amount) public returns(bool);
 }
