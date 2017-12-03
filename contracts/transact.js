@@ -1,11 +1,26 @@
-const { connect, wrapContract, getAccounts, sendTransaction } = require('eth-tx');
+const { connect, wrapContract, getAccounts, getBalance, sendTransaction } = require('eth-tx');
 const path = require("path");
 const fs = require("fs");
 
-const { MiniMeTokenFactory, MiniMeToken } = require("./build/token-factory.js");
-const { TvrboTokenSale } = require("./build/token-sale.js");
+const { MiniMeTokenFactory, MiniMeToken, TvrboTokenSale } = require("./build/token-sale.js");
+
+const MiniMeTokenFactoryContract = wrapContract(
+	MiniMeTokenFactory.abi,
+	MiniMeTokenFactory.byteCode
+);
+const MiniMeTokenContract = wrapContract(
+	MiniMeToken.abi,
+	MiniMeToken.byteCode
+);
+const TvrboTokenSaleContract = wrapContract(
+	TvrboTokenSale.abi,
+	TvrboTokenSale.byteCode
+);
 
 var address;
+const tokenAddress = "0x651E57Fc26C136f2E68c757b97084ad7CE54cb11";
+const tokenSaleAddress = "0x583303803891427F823Fe510A7A2e7F9438dA51d";
+var vaultAddress;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Connect to an external RPC node
@@ -24,24 +39,39 @@ async function startConnection() {
 
 async function transact() {
 	try {
-		const tokenSaleAddress = "0x33Efa70bDd4852E10251B56e0F8Bef956281083a";
-		const TvrboTokenSaleContract = wrapContract(
-			TvrboTokenSale.abi,
-			TvrboTokenSale.byteCode
-		);
-
 		const accounts = await getAccounts();
+		const sender = accounts[5];
+		vaultAddress = accounts[1];
 
 		// SALE
+		console.log("Attaching to MiniMeToken");
+		const tokenInstance = new MiniMeTokenContract(tokenAddress);
+
 		console.log("Attaching to TvrboTokenSale");
 		const tokenSaleInstance = new TvrboTokenSaleContract(tokenSaleAddress);
 
+		console.log("Sender still has", await getBalance(sender));
+		console.log("Vault still has", await getBalance(vaultAddress));
+
+		console.log("Sending 0.1 eth to", tokenSaleAddress);
 		var result = await sendTransaction({
-			from: accounts[5],
+			from: sender,
 			to: tokenSaleAddress,
-			value: "10000000000000000"
+			value: "100000000000000000"
 		});
+		console.log("Done");
+
+		console.log("Sender now has", await getBalance(sender));
+		console.log("Vault now has", await getBalance(vaultAddress));
+		console.log();
+		console.log("Balance of", sender, await tokenInstance.balanceOf(sender).call({}));
+		console.log("Total collected", await tokenSaleInstance.totalCollected().call({}));
+
 	} catch (err) {
+		setTimeout(async() => {
+			const tokenSaleInstance = new TvrboTokenSaleContract(tokenSaleAddress);
+			console.log("STEP", await tokenSaleInstance.getStep().call({}));
+		}, 2000)
 		console.log(err.message, err);
 	}
 }
