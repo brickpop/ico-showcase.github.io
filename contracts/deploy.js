@@ -68,6 +68,10 @@ async function deploy() {
 		);
 		console.log("Deployed on", tokenSaleInstance.$address);
 
+		console.log("Setting TvrboTokenSale instance as controller of the MiniMe Token");
+		await tokenInstance.changeController(tokenSaleInstance.$address).send({});
+		console.log("Changed the token controller");
+
 	} catch (err) {
 		console.log(err);
 	}
