@@ -2,12 +2,12 @@ import React from 'react';
 import * as Web3Wrap from "web3-wrap";
 import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import { HashStore } from "../assets/contracts.js";
+import { TvrboTokenSale } from "../contracts/build/token-sale.js";
 import { getEthUsdRate } from "../lib/api";
 
 const tokenSaleAddress = "0x03f3fE224F6c4eB3437b273fB682326034A69EfD";
 const targetNetwork = "ropsten";
-const ethTokenRate = 100;
+const ethTokenRate = 1;
 
 export default class extends React.Component {
 	state = {
@@ -29,7 +29,7 @@ export default class extends React.Component {
 		getEthUsdRate().then(rate => this.setState({ ethUsdRate: rate }));
 		Web3Wrap.onConnectionChanged(status => this.connectionChanged(status));
 
-		this.HashStoreContract = Web3Wrap.wrapContract(HashStore.abi, HashStore.byteCode);
+		this.TvrboTokenSaleContract = Web3Wrap.wrapContract(TvrboTokenSale.abi, TvrboTokenSale.byteCode);
 
 		this.connect().then(accounts => {
 			this.setState({ connected: true, accounts });
@@ -70,23 +70,23 @@ export default class extends React.Component {
 	}
 
 	attachToContract() {
-		if (!this.hashStoreInstance) {
-			this.hashStoreInstance = this.HashStoreContract.attach(tokenSaleAddress);
+		if (!this.tvrboTokenSaleInstance) {
+			this.tvrboTokenSaleInstance = this.TvrboTokenSaleContract.attach(tokenSaleAddress);
 		}
 	}
 
 	updateSaleStatus() {
 		this.attachToContract();
 
-		return this.hashStoreInstance
-			.getHash()
-			.then(hash => {
-				this.setState({ status: "Current Hash: " + hash });
-			})
-			.catch(err => {
-				// alert(err.message);
-				// setStatus(err.message);
-			});
+		// return this.tvrboTokenSaleInstance
+		// 	.getHash()
+		// 	.then(hash => {
+		// 		this.setState({ status: "Current Hash: " + hash });
+		// 	})
+		// 	.catch(err => {
+		// 		// alert(err.message);
+		// 		// setStatus(err.message);
+		// 	});
 	}
 
 	connectionChanged(status) {
@@ -123,7 +123,7 @@ export default class extends React.Component {
 		// 			if (name != "ropsten")
 		// 				throw new Error("Please, switch to the Ropsten network");
 
-		// 			return this.hashStoreInstance.setHash(hash).send({});
+		// 			return this.tvrboTokenSaleInstance.setHash(hash).send({});
 		// 		})
 		// 		.then(result => {
 		// 			console.log(result);
