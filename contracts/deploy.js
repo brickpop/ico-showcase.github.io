@@ -60,8 +60,8 @@ async function deploy() {
 		// SALE
 		console.log("Deploying TvrboTokenSale");
 		const tokenSaleInstance = await TvrboTokenSaleContract.new(
-			Date.now(),// _startFundingTime
-			Date.now() + 1000 * 60 * 60 * 24 * 30,// _endFundingTime
+			Date.now() / 1000,// _startFundingTime
+			Date.now() + 60 * 60 * 24 * 30,// _endFundingTime
 			"10000000000000000000000",// _maximumFunding  10000 eth
 			accounts[1],// _vaultAddress
 			tokenInstance.$address// tokenAddress

@@ -5,8 +5,9 @@ import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownTo
 import { TvrboTokenSale } from "../contracts/build/token-sale.js";
 import { getEthUsdRate } from "../lib/api";
 
-const tokenSaleAddress = "0x03f3fE224F6c4eB3437b273fB682326034A69EfD";
-const targetNetwork = "ropsten";
+const tokenAddress = "0x540bA48A94D96cf426c8bE99d965A17f068970c4";
+const tokenSaleAddress = "0xE72180e839cC6D4087f7cFC96bd7C0E364f72AAa";
+const targetNetwork = "private";
 const ethTokenRate = 1;
 
 export default class extends React.Component {
