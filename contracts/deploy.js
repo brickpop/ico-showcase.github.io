@@ -1,4 +1,4 @@
-const { connect, wrapContract, getAccounts, getBalance, sendTransaction } = require('eth-tx');
+const { connect, wrapContract, getAccounts, getBalance, sendTransaction, getCurrentWeb3 } = require('eth-tx');
 const path = require("path");
 const fs = require("fs");
 
@@ -26,7 +26,8 @@ async function startConnection() {
 	console.log("Connecting");
 
 	try {
-		await connect(); // defaults to localhost:8545
+		await connect("https://ropsten.infura.io/uHMeUGViSqLHNny2voyv"); // defaults to localhost:8545
+		// await connect(); // defaults to localhost:8545
 	} catch (err) {
 		console.log("Unable to connect", err);
 	}
@@ -37,6 +38,12 @@ async function startConnection() {
 
 async function deploy() {
 	try {
+		const accounts = await getAccounts();
+		vaultAddress = accounts[0];
+		console.log("ACCOUNTS", accounts);
+
+		getCurrentWeb3().eth.personal.unlockAccount(accounts[0], "");
+
 		// FACTORY
 		console.log();
 		console.log("Deploying MiniMeTokenFactory");
@@ -57,15 +64,12 @@ async function deploy() {
 		);
 		console.log("Deployed on", tokenInstance.$address);
 
-		const accounts = await getAccounts();
-		vaultAddress = accounts[1];
-
 		// SALE
 		console.log();
-		console.log("Deploying TvrboTokenSale");
+		console.log("Deploying TokenSale");
 		const tokenSaleInstance = await TvrboTokenSaleContract.new(
 			Date.now() / 1000 - 60 * 60,// _startFundingTime
-			Date.now() + 60 * 60 * 24 * 30,// _endFundingTime
+			Date.now() / 1000 + 60 * 60 * 24 * 30,// _endFundingTime
 			"10000000000000000000000",// _maximumFunding  10000 eth
 			vaultAddress,// _vaultAddress
 			tokenInstance.$address// tokenAddress
@@ -73,7 +77,7 @@ async function deploy() {
 		console.log("Deployed on", tokenSaleInstance.$address);
 		console.log();
 
-		console.log("Setting TvrboTokenSale instance as controller of the MiniMe Token");
+		console.log("Setting TokenSale instance as controller of the MiniMe Token");
 		await tokenInstance.changeController(tokenSaleInstance.$address).send({});
 		console.log("Changed the token controller");
 
@@ -88,37 +92,37 @@ async function deploy() {
 //
 
 async function transact() {
-	// try {
-	// 	const accounts = await getAccounts();
-	// 	const sender = accounts[5];
+	try {
+		const accounts = await getAccounts();
+		const sender = accounts[0];
 
-	// 	// SALE
-	// 	console.log("Attaching to MiniMeToken");
-	// 	const tokenInstance = new MiniMeTokenContract(tokenAddress);
+		// SALE
+		console.log("Attaching to MiniMeToken");
+		const tokenInstance = new MiniMeTokenContract(tokenAddress);
 
-	// 	console.log("Attaching to TvrboTokenSale");
-	// 	const tokenSaleInstance = new TvrboTokenSaleContract(tokenSaleAddress);
+		console.log("Attaching to TokenSale");
+		const tokenSaleInstance = new TvrboTokenSaleContract(tokenSaleAddress);
 
-	// 	console.log("Sender still has", await getBalance(sender));
-	// 	console.log("Vault still has", await getBalance(vaultAddress));
+		console.log("Sender still has", await getBalance(sender));
+		console.log("Vault still has", await getBalance(vaultAddress));
 
-	// 	console.log("Sending 0.1 eth to", tokenSaleAddress);
-	// 	var result = await sendTransaction({
-	// 		from: sender,
-	// 		to: tokenSaleAddress,
-	// 		value: "100000000000000000"
-	// 	});
-	// 	console.log("Done");
+		console.log("Sending 0.1 eth to", tokenSaleAddress);
+		var result = await sendTransaction({
+			from: sender,
+			to: tokenSaleAddress,
+			value: "100000000000000000"
+		});
+		console.log("Done");
 
-	// 	console.log("Sender now has", await getBalance(sender));
-	// 	console.log("Vault now has", await getBalance(vaultAddress));
-	// 	console.log();
-	// 	console.log("Balance of", sender, await tokenInstance.balanceOf(sender).call({}));
-	// 	console.log("Total collected", await tokenSaleInstance.totalCollected().call({}));
+		console.log("Sender now has", await getBalance(sender));
+		console.log("Vault now has", await getBalance(vaultAddress));
+		console.log();
+		console.log("Balance of", sender, await tokenInstance.balanceOf(sender).call({}), "tokens");
+		console.log("Total collected", await tokenSaleInstance.totalCollected().call({}), "ether");
 
-	// } catch (err) {
-	// 	console.log(err.message, err);
-	// }
+	} catch (err) {
+		console.log(err.message, err);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -130,7 +134,18 @@ async function main() {
 		await startConnection();
 		await deploy();
 
-		// await transact();
+		console.log("\n\nTRANSACTION 1");
+		await transact();
+		console.log("\n\nTRANSACTION 2");
+		await transact();
+		console.log("\n\nTRANSACTION 3");
+		await transact();
+		console.log("\n\nTRANSACTION 4");
+		await transact();
+		console.log("\n\nTRANSACTION 5");
+		await transact();
+		console.log("\n\nTRANSACTION 6");
+		await transact();
 	} catch (err) {
 		console.log("Unable to complete", err);
 	}

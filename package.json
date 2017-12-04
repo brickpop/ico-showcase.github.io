@@ -25,7 +25,7 @@
     "react-dom": "^16.1.1",
     "react-slick": "^0.15.4",
     "reactstrap": "^5.0.0-alpha.4",
-    "web3-wrap": "^0.9.4"
+    "web3-wrap": "^0.9.5"
   },
   "devDependencies": {
     "eth-tx": "^0.9.6"
