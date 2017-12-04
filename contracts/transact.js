@@ -18,8 +18,8 @@ const TvrboTokenSaleContract = wrapContract(
 );
 
 var address;
-const tokenAddress = "0x651E57Fc26C136f2E68c757b97084ad7CE54cb11";
-const tokenSaleAddress = "0x583303803891427F823Fe510A7A2e7F9438dA51d";
+const tokenAddress = "0x18B14d15cb73FaF374B99BB9763f091817bAf579";
+const tokenSaleAddress = "0xF0DABd503253E874c35CF9Da87e6419f2be31fcE";
 var vaultAddress;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,8 +70,8 @@ async function transact() {
 	} catch (err) {
 		setTimeout(async() => {
 			const tokenSaleInstance = new TvrboTokenSaleContract(tokenSaleAddress);
-			console.log("STEP", await tokenSaleInstance.getStep().call({}));
-		}, 2000)
+			console.log("STEP", await tokenSaleInstance.debug_step().call({}));
+		}, 200)
 		console.log(err.message, err);
 	}
 }
