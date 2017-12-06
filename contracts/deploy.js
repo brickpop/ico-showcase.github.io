@@ -1,8 +1,9 @@
 const { connect, wrapContract, getAccounts, getBalance, sendTransaction, getCurrentWeb3 } = require('eth-tx');
 const path = require("path");
 const fs = require("fs");
+const Promise = require('bluebird');
 
-const { MiniMeTokenFactory, MiniMeToken, TvrboTokenSale } = require("./build/token-sale.js");
+const { MiniMeTokenFactory, MiniMeToken, Campaign } = require("./build/token-sale.js");
 
 const MiniMeTokenFactoryContract = wrapContract(
 	MiniMeTokenFactory.abi,
@@ -12,13 +13,13 @@ const MiniMeTokenContract = wrapContract(
 	MiniMeToken.abi,
 	MiniMeToken.byteCode
 );
-const TvrboTokenSaleContract = wrapContract(
-	TvrboTokenSale.abi,
-	TvrboTokenSale.byteCode
+const CampaignContract = wrapContract(
+	Campaign.abi,
+	Campaign.byteCode
 );
 
-var address;
-var tokenAddress, tokenSaleAddress, vaultAddress;
+var address, accounts;
+var factoryAddress, tokenAddress, campaignAddress, vaultAddress;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Connect to an external RPC node
@@ -26,8 +27,15 @@ async function startConnection() {
 	console.log("Connecting");
 
 	try {
-		await connect("https://ropsten.infura.io/uHMeUGViSqLHNny2voyv"); // defaults to localhost:8545
+		// await connect("https://ropsten.infura.io/uHMeUGViSqLHNny2voyv"); // defaults to localhost:8545
+		await connect("ws://localhost:8546");
 		// await connect(); // defaults to localhost:8545
+
+		// getCurrentWeb3().eth.personal.unlockAccount(accounts[0], "");
+
+		accounts = await getAccounts();
+		vaultAddress = accounts[0];
+		console.log("ACCOUNTS", accounts);
 	} catch (err) {
 		console.log("Unable to connect", err);
 	}
@@ -36,25 +44,27 @@ async function startConnection() {
 ///////////////////////////////////////////////////////////////////////////////
 //
 
-async function deploy() {
+async function deployFactory() {
 	try {
-		const accounts = await getAccounts();
-		vaultAddress = accounts[0];
-		console.log("ACCOUNTS", accounts);
-
-		getCurrentWeb3().eth.personal.unlockAccount(accounts[0], "");
-
-		// FACTORY
 		console.log();
 		console.log("Deploying MiniMeTokenFactory");
 		const tokenFactoryInstance = await MiniMeTokenFactoryContract.new();
 		console.log("Deployed on", tokenFactoryInstance.$address);
+		factoryAddress = tokenFactoryInstance.$address;
+	} catch (err) {
+		console.log(err);
+	}
+}
 
-		// TOKEN
+///////////////////////////////////////////////////////////////////////////////
+//
+
+async function deployToken() {
+	try {
 		console.log();
 		console.log("Deploying MiniMeToken");
 		const tokenInstance = await MiniMeTokenContract.new(
-			tokenFactoryInstance.$address, //_tokenFactory
+			factoryAddress, //_tokenFactory
 			0, //_parentToken,
 			0, //_parentSnapShotBlock,
 			"Tvrbo Test Token", // _tokenName,
@@ -63,26 +73,43 @@ async function deploy() {
 			true //_transfersEnabled
 		);
 		console.log("Deployed on", tokenInstance.$address);
+		tokenAddress = tokenInstance.$address;
+	} catch (err) {
+		console.log(err);
+	}
+}
 
-		// SALE
+///////////////////////////////////////////////////////////////////////////////
+//
+
+async function deployController() {
+	try {
 		console.log();
-		console.log("Deploying TokenSale");
-		const tokenSaleInstance = await TvrboTokenSaleContract.new(
+		console.log("Deploying Campaign");
+		const campaignInstance = await CampaignContract.new(
 			Date.now() / 1000 - 60 * 60,// _startFundingTime
 			Date.now() / 1000 + 60 * 60 * 24 * 30,// _endFundingTime
 			"10000000000000000000000",// _maximumFunding  10000 eth
 			vaultAddress,// _vaultAddress
-			tokenInstance.$address// tokenAddress
+			tokenAddress// tokenAddress
 		);
-		console.log("Deployed on", tokenSaleInstance.$address);
+		console.log("Deployed on", campaignInstance.$address);
 		console.log();
+		campaignAddress = campaignInstance.$address;
+	} catch (err) {
+		console.log(err);
+	}
+}
 
-		console.log("Setting TokenSale instance as controller of the MiniMe Token");
-		await tokenInstance.changeController(tokenSaleInstance.$address).send({});
+///////////////////////////////////////////////////////////////////////////////
+//
+
+async function changeController() {
+	try {
+		console.log("Setting Campaign instance as controller of the MiniMe Token");
+		const tokenInstance = new MiniMeTokenContract(tokenAddress);
+		await tokenInstance.changeController(campaignAddress).send({});
 		console.log("Changed the token controller");
-
-		tokenAddress = tokenInstance.$address;
-		tokenSaleAddress = tokenSaleInstance.$address;
 	} catch (err) {
 		console.log(err);
 	}
@@ -93,24 +120,35 @@ async function deploy() {
 
 async function transact() {
 	try {
-		const accounts = await getAccounts();
 		const sender = accounts[0];
 
 		// SALE
 		console.log("Attaching to MiniMeToken");
 		const tokenInstance = new MiniMeTokenContract(tokenAddress);
+		// tokenInstance.$contract.events.Trace({}).on('data', (ev) => {
+		// 	console.log("\n\nTOKEN TRACE", ev)
+		// }).on('error', (err) => {
+		// 	console.log("\n\nTOKEN TRACE ERROR", err)
+		// });
 
-		console.log("Attaching to TokenSale");
-		const tokenSaleInstance = new TvrboTokenSaleContract(tokenSaleAddress);
+		console.log("Attaching to Campaign");
+		const campaignInstance = new CampaignContract(campaignAddress);
+		// campaignInstance.$contract.events.Trace({}).on('data', (ev) => {
+		// 	console.log("\n\nCAMPAIGN EVENT", ev)
+		// }).on('error', (err) => {
+		// 	console.log("\n\nCAMPAIGN ERROR", err)
+		// });
 
 		console.log("Sender still has", await getBalance(sender));
 		console.log("Vault still has", await getBalance(vaultAddress));
 
-		console.log("Sending 0.1 eth to", tokenSaleAddress);
+		console.log("Sending eth to", campaignAddress);
 		var result = await sendTransaction({
 			from: sender,
-			to: tokenSaleAddress,
-			value: "100000000000000000"
+			to: campaignAddress,
+			value: 10000000,
+			gas: 4400000,
+			gasPrice: 96000000000
 		});
 		console.log("Done");
 
@@ -118,7 +156,7 @@ async function transact() {
 		console.log("Vault now has", await getBalance(vaultAddress));
 		console.log();
 		console.log("Balance of", sender, await tokenInstance.balanceOf(sender).call({}), "tokens");
-		console.log("Total collected", await tokenSaleInstance.totalCollected().call({}), "ether");
+		console.log("Total collected", await campaignInstance.totalCollected().call({}), "ether");
 
 	} catch (err) {
 		console.log(err.message, err);
@@ -132,7 +170,10 @@ async function transact() {
 async function main() {
 	try {
 		await startConnection();
-		await deploy();
+		await deployFactory();
+		await deployToken();
+		await deployController();
+		await changeController();
 
 		console.log("\n\nTRANSACTION 1");
 		await transact();
