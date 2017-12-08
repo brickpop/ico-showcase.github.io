@@ -44,12 +44,12 @@ export default class extends React.Component {
 						</div>
 						<div className="col-md-7">
 
-							<div className="row">
+							<div className="row text-right">
 								<div className="col">
 									<h4>Market</h4>
 								</div>
 							</div>
-							<div className="row">
+							<div className="row text-right">
 								<div className="col-4">
 									<p>Target</p>
 									<h4>20,000</h4>
@@ -64,12 +64,12 @@ export default class extends React.Component {
 								</div>
 							</div>
 							<hr/>
-							<div className="row">
+							<div className="row text-right">
 								<div className="col">
 									<h4>Use of funds</h4>
 								</div>
 							</div>
-							<div className="row">
+							<div className="row text-right">
 								<div className="col-4">
 									<p>Token sale</p>
 									<h4>70%</h4>

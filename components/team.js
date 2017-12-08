@@ -16,33 +16,33 @@ export default class extends React.Component {
 
 					<div className="row text-center">
 						<div className="col-md-4">
-							<img src="http://via.placeholder.com/100x100" className="rounded-circle" />
+							<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/lexis/assets/images/team-1.jpg" className="rounded-circle" />
 							<h5>John Smith, CEO</h5>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 						</div>
 						<div className="col-md-4">
-							<img src="http://via.placeholder.com/100x100" className="rounded-circle" />
+							<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/lexis/assets/images/team-2.jpg" className="rounded-circle" />
 							<h5>Johana Smith, CTO</h5>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 						</div>
 						<div className="col-md-4">
-							<img src="http://via.placeholder.com/100x100" className="rounded-circle" />
+							<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/lexis/assets/images/team-3.jpg" className="rounded-circle" />
 							<h5>Johannes Smith, CFO</h5>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 						</div>
 
 						<div className="col-md-4">
-							<img src="http://via.placeholder.com/100x100" className="rounded-circle" />
+							<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/lexis/assets/images/team-4.jpg" className="rounded-circle" />
 							<h5>John Smith, CEO</h5>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 						</div>
 						<div className="col-md-4">
-							<img src="http://via.placeholder.com/100x100" className="rounded-circle" />
+							<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/lexis/assets/images/team-1.jpg" className="rounded-circle" />
 							<h5>Johana Smith, CTO</h5>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 						</div>
 						<div className="col-md-4">
-							<img src="http://via.placeholder.com/100x100" className="rounded-circle" />
+							<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/lexis/assets/images/team-2.jpg" className="rounded-circle" />
 							<h5>Johannes Smith, CFO</h5>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 						</div>
@@ -56,12 +56,12 @@ export default class extends React.Component {
 
 					<div className="row text-center">
 						<div className="col-md-6">
-							<img src="http://via.placeholder.com/120x120" className="rounded-circle" />
+							<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/lexis/assets/images/team-3.jpg" className="rounded-circle" />
 							<h5>John Smith, Expert</h5>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 						</div>
 						<div className="col-md-6">
-							<img src="http://via.placeholder.com/120x120" className="rounded-circle" />
+							<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/lexis/assets/images/team-4.jpg" className="rounded-circle" />
 							<h5>Johana Smith, Expert</h5>
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 						</div>

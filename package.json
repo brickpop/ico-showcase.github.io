@@ -23,6 +23,7 @@
     "bluebird": "^3.5.1",
     "next": "^4.1.4",
     "react": "^16.1.1",
+    "react-countup": "^3.0.2",
     "react-dom": "^16.1.1",
     "react-particles-js": "^2.1.0",
     "react-slick": "^0.15.4",

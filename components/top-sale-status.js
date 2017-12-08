@@ -2,6 +2,7 @@ import React from 'react';
 import * as Web3Wrap from "web3-wrap";
 import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Particles from 'react-particles-js';
+import CountUp from 'react-countup';
 
 import { Campaign, MiniMeToken } from "../contracts/build/token-sale.js";
 import { getEthUsdRate } from "../lib/api";
@@ -58,9 +59,9 @@ export default class extends React.Component {
 			this.updateInterval = setInterval(() => this.updateSaleStatus(), 5000);
 			return this.updateSaleStatus();
 		}).then(() => getEthUsdRate().then(rate => this.setState({ ethUsdRate: rate })))
-		.catch(err => {
-			this.setError(err.message);
-		});
+			.catch(err => {
+				this.setError(err.message);
+			});
 	}
 
 	componentWillUnmount() {
@@ -83,7 +84,7 @@ export default class extends React.Component {
 
 	weiToDollar(wei) {
 		if (!wei || wei == "-") return wei;
-		return "$ " + ((wei / 1000000000000000000) * this.state.ethUsdRate).toFixed(0);
+		return ((wei / 1000000000000000000) * this.state.ethUsdRate);
 	}
 
 	connect() {
@@ -94,8 +95,8 @@ export default class extends React.Component {
 		} else {
 			return Web3Wrap.connect().catch(err => {
 				if (err && err.message.match(/Invalid JSON RPC response/))
-					return this.setState({unsupported: true});
-					// throw new Error("You are using an unsupported browser or your connection is down");
+					return this.setState({ unsupported: true });
+				// throw new Error("You are using an unsupported browser or your connection is down");
 				else throw err;
 			});
 		}
@@ -140,13 +141,13 @@ export default class extends React.Component {
 	connectionChanged(status) {
 		this.setState(status);
 
-		if (!status.connected){
+		if (!status.connected) {
 			this.setError("You are using an unsupported browser or your connection is down");
 		}
-		else if(status.network != targetNetwork) {
+		else if (status.network != targetNetwork) {
 			this.setError(`Please, switch to the ${targetNetwork} network`);
 		}
-		else if(status.accounts && !status.accounts.length) {
+		else if (status.accounts && !status.accounts.length) {
 			this.setError("Please, unlock your wallet or create an account");
 		}
 		else {
@@ -383,9 +384,10 @@ export default class extends React.Component {
 				},
 			}
 		};
+
 		return (
 			<div id="top-status">
-			{/* <div className="canvas-overlay"/> */}
+				{/* <div className="canvas-overlay"/> */}
 				<Particles className="canvas-particles" params={particles} />
 
 				<div className="container">
@@ -400,15 +402,19 @@ export default class extends React.Component {
 					{this.state.totalBackers && this.state.totalBackers != "-" ?
 						<div id="ico-status" className="row text-center">
 							<div className="col-4">
-								<h2>{this.state.totalBackers}</h2>
+								<h2>
+									<CountUp start={0} end={this.state.totalBackers} duration={1} />
+								</h2>
 								<p>Backers</p>
 							</div>
 							<div className="col-4">
-								<h2>{this.weiToDollar(this.state.totalCollected)}</h2>
+								<h2>
+									<CountUp start={0} end={Math.round(this.weiToDollar(this.state.totalCollected || 0))} duration={1} />
+								</h2>
 								<p>Raised</p>
 							</div>
 							<div className="col-4">
-								<h2>2 days</h2>
+								<h2><CountUp start={0} end={16} duration={1} /> days</h2>
 								<p>Remaining</p>
 							</div>
 						</div> : <div className="row">&nbsp;</div>
