@@ -6,30 +6,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="news">
-				<style jsx>{`
-					#news {
-						padding: 50px 0;
-					}
-					#news h3 {
-						margin-bottom: 20px;
-					}
-					#news .item {
-						margin-top: 20px;
-						margin-bottom: 40px;
-					}
-					.btn.btn-sm {
-						width: 160px;
-					}
-					img.post-image {
-						max-width: 100%;
-					}
-					.event-box {
-						background-color: #4a4;
-						padding: 10px;
-						text-align: center;
-						color: white;
-					}
-				`}</style>
 				<div className="container">
 
 					<div className="row">

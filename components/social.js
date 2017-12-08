@@ -6,17 +6,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="social">
-				<style jsx>{`
-					#social {
-						padding: 50px 0;
-					}
-					.input-group {
-						padding: 0 0 80px;
-					}
-					#subscribe {
-						margin-top: 40px;
-					}
-				`}</style>
 				<div className="container">
 
 					<div className="row text-center">

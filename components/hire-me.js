@@ -6,15 +6,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="hire-me">
-				<style jsx>{`
-					#hire-me {
-						padding: 50px 0;
-						background-color: #f9f9f9;
-					}
-					#hire-me .btn.btn-lg {
-						margin-bottom: 30px;
-					}
-				`}</style>
 				<div className="container">
 
 					<div className="row">

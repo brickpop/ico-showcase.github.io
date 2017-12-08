@@ -6,11 +6,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="top-countdown">
-				<style jsx>{`
-					#top-countdown {
-						padding: 50px 0;
-					}
-				`}</style>
 
 				<div className="container">
 					<div className="row">

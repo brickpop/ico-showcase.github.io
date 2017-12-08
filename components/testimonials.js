@@ -18,22 +18,6 @@ export default class extends React.Component {
 		};
 		return (
 			<div id="testimonials">
-				<style jsx>{`
-					#testimonials {
-						padding: 50px 0;
-					}
-					#testimonials h3 {
-						margin-bottom: 20px;
-					}
-					#testimonials img {
-						margin: auto;
-						margin-bottom: 20px;
-					}
-					.slider-item > div {
-						max-width: 700px;
-						margin: auto;
-					}
-				`}</style>
 				<div className="container">
 
 					<div className="row">

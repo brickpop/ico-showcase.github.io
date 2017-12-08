@@ -1,0 +1,214 @@
+/*****************************************************************************/
+/* HEADER */
+
+#header .input-group {
+	max-width: 350px;
+}
+#header nav.bg-light a.navbar-brand {
+	margin: auto;
+}
+
+/*****************************************************************************/
+/* COUNTDOWN */
+
+#top-countdown {
+	padding: 50px 0;
+}
+
+/*****************************************************************************/
+/* ICO SECTION */
+
+#web3-message {
+	padding: 20px 0;
+	background-color: #ecfefb; /* default green */
+}
+#web3-message.warning {
+	background-color:#fef9ec;
+}
+#web3-message.error {
+	background-color: #fff8f8;
+}
+#web3-message .text-center.text-muted {
+	margin-top: 13px;
+}
+#web3-message .btn {
+	cursor: pointer;
+}
+#web3-message .selected-currency {
+	color: green;
+}
+
+#web3-form {
+	padding: 20px 0;
+	background-color: #ecfefb;
+}
+#web3-form .text-center.text-muted {
+	margin-top: 13px;
+}
+#web3-form .btn {
+	cursor: pointer;
+}
+#web3-form .selected-currency {
+	color: green;
+}
+
+#web3-available {
+	padding: 20px 0;
+	background-color: #fcfeec;
+}
+#web3-available.btn {
+	cursor: pointer;
+}
+
+#web3-missing {
+	padding: 20px 0;
+	background-color: #fef9ec
+}
+
+#top-status {
+	padding: 50px 0;
+}
+
+/*****************************************************************************/
+/* FOOTER */
+
+#footer {
+	padding: 50px 0;
+	background-color: #f1f1f1;
+}
+
+/*****************************************************************************/
+/* SOCIAL */
+
+#social {
+	padding: 50px 0;
+}
+#social .input-group {
+	padding: 0 0 80px;
+}
+#social #subscribe {
+	margin-top: 40px;
+}
+
+/*****************************************************************************/
+/* PRESS */
+
+#press .row.text-center img {
+	padding: 30px 0;
+	max-width: 100%;
+	margin-bottom: 15px;
+}
+/*****************************************************************************/
+/* PROJECT FEATURES */
+
+#project-features {
+	padding: 50px 0;
+	background-color: #f9f9f9;
+}
+#project-features h5 {
+	margin-top: 20px;
+}
+#project-features p {
+	margin-bottom: 30px;
+}
+
+/*****************************************************************************/
+/* PROJECT FEATURES */
+
+#project-info .row.text-center img {
+	max-width: 100%;
+	margin-bottom: 15px;
+}
+#project-info .btn.btn-lg.btn-outline-primary {
+	min-width: 70%;
+	margin: 50px 0;
+}
+#project-info-1 {
+
+}
+#project-info-2 {
+	padding: 50px 0;
+}
+
+/*****************************************************************************/
+/* ROADMAP */
+
+#roadmap {
+	padding: 50px 0;
+}
+
+/*****************************************************************************/
+/* TESTIMONIALS */
+
+#testimonials {
+	padding: 50px 0;
+}
+#testimonials h3 {
+	margin-bottom: 20px;
+}
+#testimonials img {
+	margin: auto;
+	margin-bottom: 20px;
+}
+#testimonials .slider-item > div {
+	max-width: 700px;
+	margin: auto;
+}
+
+/*****************************************************************************/
+/* SPECS */
+
+#specs {
+	padding: 50px 0;
+	background-color: #f9f9f9;
+}
+
+/*****************************************************************************/
+/* SPECS */
+
+#team {
+	padding: 50px 0;
+}
+#team h3 {
+	margin: 20px 0 40px;
+}
+#team h5 {
+	margin-top: 20px;
+}
+
+/*****************************************************************************/
+/* NEWS */
+
+#news {
+	padding: 50px 0;
+}
+#news h3 {
+	margin-bottom: 20px;
+}
+#news .item {
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+#news .btn.btn-sm {
+	width: 160px;
+}
+#news img.post-image {
+	max-width: 100%;
+}
+#news .event-box {
+	background-color: #4a4;
+	padding: 10px;
+	text-align: center;
+	color: white;
+}
+
+/*****************************************************************************/
+/* HIRE ME */
+
+#hire-me {
+	padding: 50px 0;
+	background-color: #f9f9f9;
+}
+#hire-me .btn.btn-lg {
+	margin-bottom: 30px;
+}

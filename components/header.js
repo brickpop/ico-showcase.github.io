@@ -6,16 +6,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="header">
-				<style jsx>{`
-					#header {
-					}
-					.input-group {
-						max-width: 350px;
-					}
-					nav.bg-light a.navbar-brand {
-						margin: auto;
-					}
-				`}</style>
 				<nav className="navbar navbar-light bg-light">
 					<a className="navbar-brand" href="#">Token Sale Demo</a>
 				</nav>

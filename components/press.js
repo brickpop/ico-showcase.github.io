@@ -6,13 +6,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="press">
-				<style jsx>{`
-					#press .row.text-center img {
-						padding: 30px 0;
-						max-width: 100%;
-						margin-bottom: 15px;
-					}
-				`}</style>
 				<div className="container">
 
 					<div className="row text-center">

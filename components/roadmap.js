@@ -6,11 +6,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="roadmap">
-				<style jsx>{`
-					#roadmap {
-						padding: 50px 0;
-					}
-				`}</style>
 				<div className="container">
 
 					<div className="row">

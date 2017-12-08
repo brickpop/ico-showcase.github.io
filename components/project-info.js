@@ -6,22 +6,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="project-info">
-				<style jsx>{`
-					#project-info .row.text-center img {
-							max-width: 100%;
-							margin-bottom: 15px;
-					}
-					.btn.btn-lg.btn-outline-primary {
-						min-width: 70%;
-						margin: 50px 0;
-					}
-					#project-info-1 {
-
-					}
-					#project-info-2 {
-						padding: 50px 0;
-					}
-				`}</style>
 				<div className="container">
 
 					<div id="project-info-1" className="row">

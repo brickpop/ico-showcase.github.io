@@ -204,26 +204,7 @@ export default class extends React.Component {
 	}
 
 	renderMessage(message, type) {
-		return <div id="web3-loading" className="row">
-			<style jsx>{`
-			#web3-loading {
-				padding: 20px 0;
-				background-color: #${
-				type == "error" ? "fff8f8" : (type == "warning" ? "fef9ec" : "ecfefb")
-				};
-			}
-
-			.text-center.text-muted {
-				margin-top: 13px;
-			}
-			.btn {
-				cursor: pointer;
-			}
-			.selected-currency {
-				color: green;
-			}
-		`}</style>
-
+		return <div id="web3-message" className={"row " + type}>
 			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
 				<label>Token Sale address</label>
 				<div className="input-group">
@@ -263,23 +244,6 @@ export default class extends React.Component {
 		}
 
 		return <div id="web3-form" className="row">
-			<style jsx>{`
-				#web3-form {
-					padding: 20px 0;
-					background-color: #ecfefb;
-				}
-
-				.text-center.text-muted {
-					margin-top: 13px;
-				}
-				.btn {
-					cursor: pointer;
-				}
-				.selected-currency {
-					color: green;
-				}
-			`}</style>
-
 			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
 				<label>Token Sale address</label>
 				<div className="input-group">
@@ -324,18 +288,7 @@ export default class extends React.Component {
 	}
 
 	renderChromeReady() {
-		return <div id="web3-ready" className="row">
-			<style jsx>{`
-				#web3-ready {
-					padding: 20px 0;
-					background-color: #fcfeec;
-				}
-
-				.btn {
-					cursor: pointer;
-				}
-			`}</style>
-
+		return <div id="web3-available" className="row">
 			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
 				<label>Token Sale address</label>
 				<div className="input-group">
@@ -365,13 +318,6 @@ export default class extends React.Component {
 
 	renderUnsupportedBrowser() {
 		return <div id="web3-missing" className="row">
-			<style jsx>{`
-				#web3-missing {
-					padding: 20px 0;
-					background-color: #fef9ec
-				}
-			`}</style>
-
 			<div className="col-lg-8 offset-lg-2 col-md-10 offset-md-1 text-center">
 				<h6>Your browser is not compatible with Ethereum</h6>
 				<p>Please, check one of these options:</p>
@@ -417,12 +363,6 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div id="top-status">
-
-				<style jsx>{`
-					#top-status {
-						padding: 50px 0;
-					}
-				`}</style>
 
 				<div className="container">
 					<div className="row text-center">
