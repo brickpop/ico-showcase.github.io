@@ -643,6 +643,8 @@ contract Campaign is TokenController, Owned {
     uint public endFundingTime;         // In UNIX Time Format
     uint public maximumFunding;         // In wei
     uint public totalCollected;         // In wei
+    uint public totalBackers;
+    mapping (address => bool) backed;
     MiniMeToken public tokenContract;   // The new token for this Campaign
     address public vaultAddress;        // The address to hold the funds donated
 
@@ -738,6 +740,10 @@ contract Campaign is TokenController, Owned {
 
 //Track how much the Campaign has collected
         totalCollected += msg.value;
+        if(!backed(_owner)) {
+            backed[_owner] = true;
+            totalBackers += 1;
+        }
 
 //Send the ether to the vault
         require (vaultAddress.send(msg.value));
@@ -745,6 +751,7 @@ contract Campaign is TokenController, Owned {
 // Creates an equal amount of tokens as ether sent. The new tokens are created
 //  in the `_owner` address
         require (tokenContract.generateTokens(_owner, msg.value));
+        Payment(_owner);
     }
 
 /// @notice `finalizeFunding()` ends the Campaign by calling setting the
@@ -765,4 +772,8 @@ contract Campaign is TokenController, Owned {
         vaultAddress = _newVaultAddress;
     }
 
+////////////////
+// Events
+////////////////
+    event Payment(address owner);
 }
