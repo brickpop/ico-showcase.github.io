@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Web3Wrap from "web3-wrap";
 import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import Particles from 'react-particles-js';
 
 import { Campaign, MiniMeToken } from "../contracts/build/token-sale.js";
 import { getEthUsdRate } from "../lib/api";
@@ -361,8 +362,31 @@ export default class extends React.Component {
 	}
 
 	render() {
+		var particles = {
+			particles: {
+				number: {
+					value: 13,
+					density: {
+						enable: true,
+						value_area: 900
+					}
+				},
+				color: {
+					value: "#888888"
+				},
+				"line_linked": {
+					"enable": true,
+					"distance": 300,
+					"color": "#ffffff",
+					"opacity": 0.2,
+					"width": 1
+				},
+			}
+		};
 		return (
 			<div id="top-status">
+			{/* <div className="canvas-overlay"/> */}
+				<Particles className="canvas-particles" params={particles} />
 
 				<div className="container">
 					<div className="row text-center">

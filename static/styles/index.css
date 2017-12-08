@@ -4,6 +4,9 @@
 #header .input-group {
 	max-width: 350px;
 }
+.navbar.navbar-light.bg-light {
+	background-color: #f8f9fa7f !important;
+}
 #header nav.bg-light a.navbar-brand {
 	margin: auto;
 }
@@ -17,6 +20,48 @@
 
 /*****************************************************************************/
 /* ICO SECTION */
+
+#top-status {
+	color: #f7f7f7;
+}
+#top-status canvas {
+	/* 1 */
+	/* background-color: #316db7; */
+	/* background-color: #4c89d4; */
+	/* background-color: #3d7fd0; */
+	/* background-color: #177fd7; */
+
+	/* 2 gradient */
+	/* background: linear-gradient(45deg, #0f7699, #404c8c); */
+
+	/* 2 gradient */
+	background-image: linear-gradient(to right top, rgb(25, 182, 143), rgb(68, 100, 148));
+
+	background-position: center bottom;
+	/* 3 img */
+	/* background-image: url(http://html5webtemplate.com/images/bg.jpg); */
+	/* 4 img */
+	/* background-image: url(https://mobirise.com/bootstrap-template/assets/images/macbook-926425-1920-1920x1279.jpg); */
+	/* 5 img */
+	/* background-image: url(https://mobirise.com/bootstrap-template/landing-page-template/assets/images/jason-blackeye-127871-2000x1333.jpg); */
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -10;
+}
+#top-status .canvas-overlay {
+	/* background: linear-gradient(45deg, #0f7699, #404c8c); */
+	/* background-color: #506682; */
+	opacity: 0.3;
+	z-index: -5;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
 
 #web3-message {
 	padding: 20px 0;
@@ -82,6 +127,7 @@
 
 #social {
 	padding: 50px 0;
+	background-color: white;
 }
 #social .input-group {
 	padding: 0 0 80px;
