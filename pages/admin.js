@@ -21,9 +21,9 @@ var tokenFactoryInstance, tokenInstance, tvrboTokenSaleInstance;
 export default class extends React.Component {
 	state = {
 		accounts: [],
-		tokenFactoryAddress: "0x105cea7b6BA40b11BE23534fE316a9a14A6f2978",
-		tokenAddress: "0xFEcdeb4BE68D71717D4878113C0E447F5B6B0aC0",
-		tvrboTokenSaleAddress: "0x2738b1d693faa46d3f10a56c170dcb18ab4ebeef" // gas limit 849242
+		tokenFactoryAddress: "0xf50a358e09b1dbb2855e06bb931b77f62fd44100",
+		tokenAddress: "0xbc9fddb9c74a79fe4f1e1cdddb30b0651ae4b619",
+		tvrboTokenSaleAddress: "0xdf6e8a27ec3fde32af47b61f32e09be177dd1c2d" // gas limit 849242
 	}
 
 	async connectWeb3() {
@@ -60,7 +60,7 @@ export default class extends React.Component {
 		});
 	}
 
-	// REMIX "0x916331673cd92ff39781e6e5193c8a2a40dd228c",0,0,"Tvrbo Test Token",18,"TTK",true
+	// REMIX "0xf50a358e09b1dbb2855e06bb931b77f62fd44100",0,0,"Test Token",18,"TTK",true
 	deployToken() {
 		// TOKEN
 		console.log();
@@ -69,7 +69,7 @@ export default class extends React.Component {
 			this.state.tokenFactoryAddress, //_tokenFactory
 			0, //_parentToken,
 			0, //_parentSnapShotBlock,
-			"Tvrbo Test Token", // _tokenName,
+			"Test Token", // _tokenName,
 			18, // _decimalUnits,
 			"TTK", // _tokenSymbol,
 			true, //_transfersEnabled
@@ -82,11 +82,11 @@ export default class extends React.Component {
 		});
 	}
 
-	// REMIX 0,1515008862,"10000000000000000000000","0x14f0812AFcE2a5CABF9CfBb8e5CcBf69BeC5e368","0x530741bf65be13157bbaedccaf924f7702d0afba"
+	// REMIX 0,1767225599,"10000000000000000000000","0x12CB28B5AEe07AA6305f77d73923Da2362b26E63","0xbc9fddb9c74a79fe4f1e1cdddb30b0651ae4b619"
 	async deployTokenSale() {
 		getAccounts().then(accounts => {
 			// var vaultAddress = accounts[1];
-			var vaultAddress = "0x14f0812AFcE2a5CABF9CfBb8e5CcBf69BeC5e368";
+			var vaultAddress = "0x12CB28B5AEe07AA6305f77d73923Da2362b26E63";
 
 			// SALE
 			console.log();

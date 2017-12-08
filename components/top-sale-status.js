@@ -2,13 +2,14 @@ import React from 'react';
 import * as Web3Wrap from "web3-wrap";
 import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import { TvrboTokenSale } from "../contracts/build/token-sale.js";
+import { Campaign, MiniMeToken } from "../contracts/build/token-sale.js";
 import { getEthUsdRate } from "../lib/api";
 
-const tokenAddress = "0x540bA48A94D96cf426c8bE99d965A17f068970c4";
-const tokenSaleAddress = "0xE72180e839cC6D4087f7cFC96bd7C0E364f72AAa";
-const targetNetwork = "private";
-const ethTokenRate = 1;
+const tokenAddress = "0xbc9fddb9c74a79fe4f1e1cdddb30b0651ae4b619";
+const tokenSaleAddress = "0xdf6e8a27ec3fde32af47b61f32e09be177dd1c2d";
+const vaultAddress = "0x12CB28B5AEe07AA6305f77d73923Da2362b26E63";
+const targetNetwork = "ropsten";
+const ethTokenRate = 10;
 
 export default class extends React.Component {
 	state = {
@@ -19,23 +20,28 @@ export default class extends React.Component {
 
 		ethUsdRate: 458, // default
 
-		currencyDropDownOpen: false
+		currencyDropDownOpen: false,
 
-		// accounts
+		totalBackers: "-",
+		totalCollected: "-",
+		tokenBalance: 0,
+
+		accounts: []
 		// connected
 		// network
 	};
 
 	componentDidMount() {
-		getEthUsdRate().then(rate => this.setState({ ethUsdRate: rate }));
 		Web3Wrap.onConnectionChanged(status => this.connectionChanged(status));
 
-		this.TvrboTokenSaleContract = Web3Wrap.wrapContract(TvrboTokenSale.abi, TvrboTokenSale.byteCode);
+		this.CampaignContract = Web3Wrap.wrapContract(Campaign.abi, Campaign.byteCode);
+		this.MiniMeTokenContract = Web3Wrap.wrapContract(MiniMeToken.abi, MiniMeToken.byteCode);
 
 		this.connect().then(accounts => {
 			this.setState({ connected: true, accounts });
 
 			if (!accounts || !accounts.length) throw new Error("Please, unlock your wallet or create an account");
+			this.setState({ accounts });
 
 			return Web3Wrap.getNetwork();
 		}).then(name => {
@@ -44,9 +50,9 @@ export default class extends React.Component {
 			if (name != targetNetwork)
 				throw new Error(`Please, switch to the ${targetNetwork} network`);
 
-			this.updateInterval = setInterval(() => this.updateSaleStatus(), 3000);
+			this.updateInterval = setInterval(() => this.updateSaleStatus(), 5000);
 			return this.updateSaleStatus();
-		}).catch(err => {
+		}).then(() => getEthUsdRate().then(rate => this.setState({ ethUsdRate: rate }))).catch(err => {
 			this.setState({ status: err.message, loading: false });
 		});
 	}
@@ -54,6 +60,11 @@ export default class extends React.Component {
 	componentWillUnmount() {
 		clearInterval(this.updateInterval);
 		this.updateInterval = null;
+	}
+
+	weiToDollar(wei) {
+		if (!wei || wei == "-") return wei;
+		return "$ " + ((wei / 1000000000000000000) * this.state.ethUsdRate).toFixed(0);
 	}
 
 	connect() {
@@ -71,23 +82,39 @@ export default class extends React.Component {
 	}
 
 	attachToContract() {
-		if (!this.tvrboTokenSaleInstance) {
-			this.tvrboTokenSaleInstance = this.TvrboTokenSaleContract.attach(tokenSaleAddress);
+		if (!this.tokenInstance) {
+			this.tokenInstance = this.MiniMeTokenContract.attach(tokenAddress);
+		}
+		if (!this.tokenSaleInstance) {
+			this.tokenSaleInstance = this.CampaignContract.attach(tokenSaleAddress);
+
+			// Listen to events
+			// this.tokenInstance.$contract.events.Payment({}).on('data', (ev) => {
+			// 	console.log("PAYMENT", ev)
+			// }).on('error', (err) => {
+			// 	console.log("Payment error", err)
+			// });
 		}
 	}
 
 	updateSaleStatus() {
 		this.attachToContract();
 
-		// return this.tvrboTokenSaleInstance
-		// 	.getHash()
-		// 	.then(hash => {
-		// 		this.setState({ status: "Current Hash: " + hash });
-		// 	})
-		// 	.catch(err => {
-		// 		// alert(err.message);
-		// 		// setStatus(err.message);
-		// 	});
+		this.tokenSaleInstance.totalBackers().then(amount => {
+			this.setState({ totalBackers: amount });
+
+			return this.tokenSaleInstance.totalCollected();
+		}).then(amount => {
+			this.setState({ totalCollected: amount });
+
+			return Web3Wrap.getAccounts();
+		}).then(accounts => {
+			this.setState({ accounts });
+
+			return this.tokenInstance.balanceOf(accounts[0]);
+		}).then(balance => {
+			this.setState({ tokenBalance: balance })
+		})
 	}
 
 	connectionChanged(status) {
@@ -116,26 +143,41 @@ export default class extends React.Component {
 
 	submit() {
 		this.attachToContract();
-		// 	debugger;
-		// 	const hash = "0x1234";
 
-		// 	return Web3Wrap.getNetwork()
-		// 		.then(name => {
-		// 			if (name != "ropsten")
-		// 				throw new Error("Please, switch to the Ropsten network");
+		if(this.state.investingValue <= 0) return alert("Please, enter a positive value");
 
-		// 			return this.tvrboTokenSaleInstance.setHash(hash).send({});
-		// 		})
-		// 		.then(result => {
-		// 			console.log(result);
-		// 			this.setState({ status: "Updated the hash to " + hash });
+		var amount;
+		if (this.state.inputCurrency == "ETH") {
+			amount = this.state.investingValue;
+		}
+		else if (this.state.inputCurrency == "USD"){
+			amount = this.state.investingValue / this.state.ethUsdRate;
+		}
+		else {
+			amount = this.state.investingValue / ethTokenRate;
+		}
+		amount = String(amount * 1000000000000000000);
 
-		// 			return updateStatus();
-		// 		})
-		// 		.catch(err => {
-		// 			alert(err.message);
-		// 		});
+		return Web3Wrap.getNetwork()
+			.then(name => {
+				if (name != targetNetwork)
+					throw new Error("Please, switch to the Ropsten network");
 
+				return Web3Wrap.sendTransaction({
+					from: this.state.accounts[0],
+					to: this.tokenSaleInstance.$address,
+					value: amount,
+					gas: Math.round(156276 * 1.1)
+				});
+			})
+			.then(result => {
+				console.log(result);
+
+				return this.updateSaleStatus();
+			})
+			.catch(err => {
+				alert(err.message);
+			});
 	}
 
 	renderWeb3Ready() {
@@ -187,13 +229,13 @@ export default class extends React.Component {
 
 				<InputGroup>
 					<InputGroupButton>
-						<ButtonDropdown isOpen={this.state.currencyDropDownOpen} toggle={() => this.setState({currencyDropDownOpen: !this.state.currencyDropDownOpen})}>
+						<ButtonDropdown isOpen={this.state.currencyDropDownOpen} toggle={() => this.setState({ currencyDropDownOpen: !this.state.currencyDropDownOpen })}>
 							<DropdownToggle caret color="info" outline> {this.state.inputCurrency} </DropdownToggle>
 							<DropdownMenu>
 								<DropdownItem header>Input currency</DropdownItem>
-								<DropdownItem onClick={() => this.setState({inputCurrency: "ETH"})}>Ether</DropdownItem>
-								<DropdownItem onClick={() => this.setState({inputCurrency: "USD"})}>U.S. Dollar</DropdownItem>
-								<DropdownItem onClick={() => this.setState({inputCurrency: "Tokens"})}>Tokens</DropdownItem>
+								<DropdownItem onClick={() => this.setState({ inputCurrency: "ETH" })}>Ether</DropdownItem>
+								<DropdownItem onClick={() => this.setState({ inputCurrency: "USD" })}>U.S. Dollar</DropdownItem>
+								<DropdownItem onClick={() => this.setState({ inputCurrency: "Tokens" })}>Tokens</DropdownItem>
 							</DropdownMenu>
 						</ButtonDropdown>
 					</InputGroupButton>
@@ -209,7 +251,10 @@ export default class extends React.Component {
 					{this.state.inputCurrency == "Tokens" ? <strong className="selected-currency">{tokenNumber} Tokens</strong> : <span>{tokenNumber} Tokens</span>}
 				</p>
 
-				<p className="text-center text-muted">You will be prompted to confirm the transaction</p>
+				{
+					this.state.tokenBalance > 0 ?
+						<p className="text-center text-muted">You currently own <strong>{(this.state.tokenBalance / 1000000000000000000).toFixed(2)} Test Tokens</strong></p> : null
+				}
 			</div>
 		</div>
 	}
@@ -344,11 +389,11 @@ export default class extends React.Component {
 
 					<div className="row text-center">
 						<div className="col-4">
-							<h3>27</h3>
+							<h3>{this.state.totalBackers}</h3>
 							<p>Backers</p>
 						</div>
 						<div className="col-4">
-							<h3>$ 70,000</h3>
+							<h3>{this.weiToDollar(this.state.totalCollected)}</h3>
 							<p>Raised</p>
 						</div>
 						<div className="col-4">

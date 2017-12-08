@@ -740,7 +740,7 @@ contract Campaign is TokenController, Owned {
 
 //Track how much the Campaign has collected
         totalCollected += msg.value;
-        if(!backed(_owner)) {
+        if (!backed[_owner]) {
             backed[_owner] = true;
             totalBackers += 1;
         }
@@ -748,9 +748,9 @@ contract Campaign is TokenController, Owned {
 //Send the ether to the vault
         require (vaultAddress.send(msg.value));
 
-// Creates an equal amount of tokens as ether sent. The new tokens are created
+// Creates an equal amount of tokens as ether sent * 10 (conversion rate). The new tokens are created
 //  in the `_owner` address
-        require (tokenContract.generateTokens(_owner, msg.value));
+        require (tokenContract.generateTokens(_owner, msg.value * 10));
         Payment(_owner);
     }
 
