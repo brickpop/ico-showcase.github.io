@@ -13,8 +13,11 @@ const ethTokenRate = 10;
 
 export default class extends React.Component {
 	state = {
-		status: "(Please wait)",
+		error: "",
+		message: "",
 		loading: true,
+		unsupported: false, // unsupported browser
+
 		investingValue: 0,
 		inputCurrency: "ETH",
 
@@ -26,9 +29,10 @@ export default class extends React.Component {
 		totalCollected: "-",
 		tokenBalance: 0,
 
-		accounts: []
-		// connected
-		// network
+		// Automatic fields set on connection change:
+		// - accounts
+		// - connected
+		// - network
 	};
 
 	componentDidMount() {
@@ -52,14 +56,28 @@ export default class extends React.Component {
 
 			this.updateInterval = setInterval(() => this.updateSaleStatus(), 5000);
 			return this.updateSaleStatus();
-		}).then(() => getEthUsdRate().then(rate => this.setState({ ethUsdRate: rate }))).catch(err => {
-			this.setState({ status: err.message, loading: false });
+		}).then(() => getEthUsdRate().then(rate => this.setState({ ethUsdRate: rate })))
+		.catch(err => {
+			this.setError(err.message);
 		});
 	}
 
 	componentWillUnmount() {
 		clearInterval(this.updateInterval);
 		this.updateInterval = null;
+	}
+
+	setError(message) {
+		this.setState({ error: message, loading: false });
+	}
+	clearError() {
+		this.setState({ error: "" });
+	}
+	setMessage(message) {
+		this.setState({ message: message });
+	}
+	clearMessage() {
+		this.setState({ message: "" });
 	}
 
 	weiToDollar(wei) {
@@ -75,7 +93,8 @@ export default class extends React.Component {
 		} else {
 			return Web3Wrap.connect().catch(err => {
 				if (err && err.message.match(/Invalid JSON RPC response/))
-					throw new Error("You are using an unsupported browser or your connection is down");
+					return this.setState({unsupported: true});
+					// throw new Error("You are using an unsupported browser or your connection is down");
 				else throw err;
 			});
 		}
@@ -120,37 +139,41 @@ export default class extends React.Component {
 	connectionChanged(status) {
 		this.setState(status);
 
-		if (!status.connected)
-			this.setState({
-				status:
-					"You are using an unsupported browser or your connection is down"
-			});
-		else if (status.accounts && status.accounts.length)
-			this.setState({ status: `Web3 connection status changed (${status.network})` });
-		else this.setState({ status: "Please, unlock your wallet or create an account" });
+		if (!status.connected){
+			this.setError("You are using an unsupported browser or your connection is down");
+		}
+		else if(status.network != targetNetwork) {
+			this.setError(`Please, switch to the ${targetNetwork} network`);
+		}
+		else if(status.accounts && !status.accounts.length) {
+			this.setError("Please, unlock your wallet or create an account");
+		}
+		else {
+			this.clearError();
+
+			if (!this.updateInterval) {
+				this.updateInterval = setInterval(() => this.updateSaleStatus(), 5000);
+			}
+			return this.updateSaleStatus();
+		}
+
 	}
 
 	investingValueChanged(ev) {
 		const val = parseFloat(ev.target.value) || 0;
-		this.setState({ investingValue: val })
-	}
-
-	shiftCurrency() {
-		if (this.state.inputCurrency == "ETH") this.setState({ inputCurrency: "USD" });
-		else if (this.state.inputCurrency == "USD") this.setState({ inputCurrency: "Tokens" });
-		else this.setState({ inputCurrency: "ETH" });
+		this.setState({ investingValue: val });
 	}
 
 	submit() {
 		this.attachToContract();
 
-		if(this.state.investingValue <= 0) return alert("Please, enter a positive value");
+		if (this.state.investingValue <= 0) return alert("Please, enter a positive value");
 
 		var amount;
 		if (this.state.inputCurrency == "ETH") {
 			amount = this.state.investingValue;
 		}
-		else if (this.state.inputCurrency == "USD"){
+		else if (this.state.inputCurrency == "USD") {
 			amount = this.state.investingValue / this.state.ethUsdRate;
 		}
 		else {
@@ -161,7 +184,7 @@ export default class extends React.Component {
 		return Web3Wrap.getNetwork()
 			.then(name => {
 				if (name != targetNetwork)
-					throw new Error("Please, switch to the Ropsten network");
+					throw new Error(`Please, switch to the ${targetNetwork} network`);
 
 				return Web3Wrap.sendTransaction({
 					from: this.state.accounts[0],
@@ -178,6 +201,47 @@ export default class extends React.Component {
 			.catch(err => {
 				alert(err.message);
 			});
+	}
+
+	renderMessage(message, type) {
+		return <div id="web3-loading" className="row">
+			<style jsx>{`
+			#web3-loading {
+				padding: 20px 0;
+				background-color: #${
+				type == "error" ? "fff8f8" : (type == "warning" ? "fef9ec" : "ecfefb")
+				};
+			}
+
+			.text-center.text-muted {
+				margin-top: 13px;
+			}
+			.btn {
+				cursor: pointer;
+			}
+			.selected-currency {
+				color: green;
+			}
+		`}</style>
+
+			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
+				<label>Token Sale address</label>
+				<div className="input-group">
+					<span className="input-group-addon">@</span>
+					<input type="text" readOnly={true} className="form-control" aria-label="Token Sale Address" value={tokenSaleAddress} />
+				</div>
+				<hr />
+
+				{
+					type == "error" ?
+						<h6 className="text-center text-danger">{message}</h6> :
+						type == "warning" ?
+							<h6 className="text-center text-warning">{message}</h6> :
+							<p className="text-center text-muted">{message}</p>
+				}
+
+			</div>
+		</div>;
 	}
 
 	renderWeb3Ready() {
@@ -253,7 +317,7 @@ export default class extends React.Component {
 
 				{
 					this.state.tokenBalance > 0 ?
-						<p className="text-center text-muted">You currently own <strong>{(this.state.tokenBalance / 1000000000000000000).toFixed(2)} Test Tokens</strong></p> : null
+						<p className="text-center text-info">You currently own <strong>{(this.state.tokenBalance / 1000000000000000000).toFixed(2)} Demo Tokens</strong></p> : null
 				}
 			</div>
 		</div>
@@ -287,11 +351,11 @@ export default class extends React.Component {
 
 				<div className="row text-center">
 					<div className="col-6">
-						<a href="" className="btn btn-block btn-outline-primary">Install Metamask<br />for Chrome</a>
+						<a href="https://metamask.io/" target="_blank" className="btn btn-block btn-outline-primary">Install Metamask<br />for Chrome</a>
 						<p><small><a href="#" className="text-muted">More info</a></small></p>
 					</div>
 					<div className="col-6">
-						<a href="" className="btn btn-block btn-outline-success">Connect with <br />MyEtherwallet</a>
+						<a href="https://www.myetherwallet.com/#send-transaction" target="_blank" className="btn btn-block btn-outline-success">Connect with <br />MyEtherwallet</a>
 						<p><small><a href="#" className="text-muted">More info</a></small></p>
 					</div>
 				</div>
@@ -299,29 +363,7 @@ export default class extends React.Component {
 		</div>
 	}
 
-	renderUnlockWallet() {
-		return <div id="web3-locked" className="row">
-			<style jsx>{`
-				#web3-locked {
-					padding: 20px 0;
-					background-color: #fef9ec
-				}
-			`}</style>
-
-			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
-				<label>Token Sale address</label>
-				<div className="input-group">
-					<span className="input-group-addon">@</span>
-					<input type="text" readOnly={true} className="form-control" aria-label="Token Sale Address" value={tokenSaleAddress} />
-				</div>
-
-				<hr />
-				<h6>Please, unlock your wallet to continue</h6>
-			</div>
-		</div>
-	}
-
-	renderNoWeb3() {
+	renderUnsupportedBrowser() {
 		return <div id="web3-missing" className="row">
 			<style jsx>{`
 				#web3-missing {
@@ -361,10 +403,14 @@ export default class extends React.Component {
 	}
 
 	fundingSection() {
-		if (this.state.loading) return <div />;
-		else if (!this.state.connected) return this.renderNoWeb3();
-		else if (!this.state.accounts || !this.state.accounts.length) return this.renderUnlockWallet();
-		else if (window && !!window.chrome) return this.renderWeb3Ready()
+		if (this.state.loading) return this.renderMessage("Loading...");
+		else if (this.state.unsupported) {
+			if (window && !!window.chrome) return this.renderChromeReady()
+			else return this.renderUnsupportedBrowser();
+		}
+		else if (this.state.error) return this.renderMessage(this.state.error, "error");
+		else if (!this.state.connected) return this.renderMessage("Your connections seems to be down", "error");
+		else if (!this.state.accounts || !this.state.accounts.length) return this.renderMessage("Please, unlock your wallet or create an account", "warning");
 		else return this.renderWeb3Ready()
 	}
 
@@ -387,22 +433,22 @@ export default class extends React.Component {
 						</div>
 					</div>
 
-					<div className="row text-center">
-						<div className="col-4">
-							<h3>{this.state.totalBackers}</h3>
-							<p>Backers</p>
-						</div>
-						<div className="col-4">
-							<h3>{this.weiToDollar(this.state.totalCollected)}</h3>
-							<p>Raised</p>
-						</div>
-						<div className="col-4">
-							<h3>2 days</h3>
-							<p>Remaining</p>
-						</div>
-					</div>
-
-					{/* <p className="text-center text-muted">{this.state.status}</p> */}
+					{this.state.totalBackers && this.state.totalBackers != "-" ?
+						<div className="row text-center">
+							<div className="col-4">
+								<h3>{this.state.totalBackers}</h3>
+								<p>Backers</p>
+							</div>
+							<div className="col-4">
+								<h3>{this.weiToDollar(this.state.totalCollected)}</h3>
+								<p>Raised</p>
+							</div>
+							<div className="col-4">
+								<h3>2 days</h3>
+								<p>Remaining</p>
+							</div>
+						</div> : <div className="row">&nbsp;</div>
+					}
 
 					{this.fundingSection()}
 
