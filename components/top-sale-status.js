@@ -244,7 +244,7 @@ export default class extends React.Component {
 			tokenNumber = (this.state.investingValue || 0).toFixed(2);
 		}
 
-		return <div id="web3-form" className="row">
+		return <div id="web3-form" className="row rounded">
 			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
 				<label>Token Sale address</label>
 				<div className="input-group">
@@ -289,7 +289,7 @@ export default class extends React.Component {
 	}
 
 	renderChromeReady() {
-		return <div id="web3-available" className="row">
+		return <div id="web3-available" className="row rounded">
 			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
 				<label>Token Sale address</label>
 				<div className="input-group">
@@ -318,7 +318,7 @@ export default class extends React.Component {
 	}
 
 	renderUnsupportedBrowser() {
-		return <div id="web3-missing" className="row">
+		return <div id="web3-missing" className="row rounded">
 			<div className="col-lg-8 offset-lg-2 col-md-10 offset-md-1 text-center">
 				<h6>Your browser is not compatible with Ethereum</h6>
 				<p>Please, check one of these options:</p>
@@ -391,24 +391,24 @@ export default class extends React.Component {
 				<div className="container">
 					<div className="row text-center">
 						<div className="col-md-6 offset-md-3 col-sm-10 offset-sm-1">
-							<h2>ICO Token Sale Demo</h2>
-							<p>You are visiting an example of an ICO Token Sale developed by @ledfusion. </p>
-							<p>This can be your own ICO. While you are watching this site, hundreds of investors may be funding the project next to you.</p>
+							<h1>ICO Token Sale Demo</h1>
+							<h5>You are visiting an example of an ICO Token Sale developed by @ledfusion. </h5>
+							<h5>While you are watching this site, hundreds of investors may be funding the project next to you.</h5>
 						</div>
 					</div>
 
 					{this.state.totalBackers && this.state.totalBackers != "-" ?
-						<div className="row text-center">
+						<div id="ico-status" className="row text-center">
 							<div className="col-4">
-								<h3>{this.state.totalBackers}</h3>
+								<h2>{this.state.totalBackers}</h2>
 								<p>Backers</p>
 							</div>
 							<div className="col-4">
-								<h3>{this.weiToDollar(this.state.totalCollected)}</h3>
+								<h2>{this.weiToDollar(this.state.totalCollected)}</h2>
 								<p>Raised</p>
 							</div>
 							<div className="col-4">
-								<h3>2 days</h3>
+								<h2>2 days</h2>
 								<p>Remaining</p>
 							</div>
 						</div> : <div className="row">&nbsp;</div>
