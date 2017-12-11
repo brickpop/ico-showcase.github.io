@@ -22,21 +22,21 @@ export default class extends React.Component {
 
 					<div className="row">
 						<div className="col text-center">
-							<h3>What people thinks about Sample ICO</h3>
+							<h3>Testimonials</h3>
 						</div>
 					</div>
 
 					<Slider {...settings}>
 						<div className="slider-item">
 							<div className="text-center">
-								<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/guardian/assets/images/user-1.jpg" className="rounded-circle" />
+								<img src="/static/images/10.jpg" className="rounded-circle" />
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
 								<h6>Mahatmas Ghandi</h6>
 							</div>
 						</div>
 						<div className="slider-item">
 							<div className="text-center">
-								<img src="http://www.free-css.com/assets/files/free-css-templates/preview/page217/guardian/assets/images/user-1.jpg" className="rounded-circle" />
+								<img src="/static/images/11.jpg" className="rounded-circle" />
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
 								<h6>Mahatmas Ghandi</h6>
 							</div>

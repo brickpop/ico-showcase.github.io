@@ -24,7 +24,7 @@ export default () => <div>
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 	</Head>
 
-	<Header />
+	{/* <Header /> */}
 	<SaleStatus />
 	<Social />
 	<Press />

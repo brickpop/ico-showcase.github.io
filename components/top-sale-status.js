@@ -393,7 +393,7 @@ export default class extends React.Component {
 				<div className="container">
 					<div className="row text-center">
 						<div className="col-md-6 offset-md-3 col-sm-10 offset-sm-1">
-							<h1>ICO Token Sale Demo</h1>
+							<h1>Token Sale Demo ICO</h1>
 							<h5>You are visiting an example of an ICO Token Sale developed by @ledfusion. </h5>
 							<h5>While you are watching this site, hundreds of investors may be funding the project next to you.</h5>
 						</div>
@@ -409,7 +409,7 @@ export default class extends React.Component {
 							</div>
 							<div className="col-4">
 								<h2>
-									<CountUp start={0} end={Math.round(this.weiToDollar(this.state.totalCollected || 0))} duration={1} />
+									$ <CountUp start={0} end={Math.round(this.weiToDollar(this.state.totalCollected || 0))} duration={1} />
 								</h2>
 								<p>Raised</p>
 							</div>

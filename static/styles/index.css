@@ -80,7 +80,7 @@ p {
 /*****************************************************************************/
 /* ICO SECTION */
 
-#top-status {
+#top-status h1, #top-status h2, #top-status h3, #top-status h4, #top-status h5, #top-status p {
 	color: #f7f7f7;
 }
 #top-status canvas {
@@ -126,6 +126,18 @@ p {
 	margin-bottom: 25px;
 }
 
+#top-status label {
+	color: #666;
+}
+#top-status  .form-control:disabled, .form-control[readonly] {
+	background-color: #fdfdfd;
+}
+#top-status .input-group-addon {
+	color: #17a2b8;
+	background-color: transparent;
+	background-image: none;
+	border-color: #17a2b8;
+}
 #ico-status {
 	margin-top: 40px;
 }
@@ -184,7 +196,7 @@ p {
 }
 
 #top-status {
-	padding: 50px 0;
+	padding: 46px 0;
 }
 
 /*****************************************************************************/
@@ -193,6 +205,9 @@ p {
 #social {
 	padding: 50px 0 25px;
 	background-color: #f6f7f8;
+}
+#social h5 {
+	margin-bottom: 40px;
 }
 #social .input-group {
 	padding: 0 0 40px;
@@ -268,7 +283,7 @@ p {
 /*****************************************************************************/
 /* ROADMAP */
 
-#roadmap {
+/* #roadmap {
 	padding: 50px 0;
 
 	background-image: linear-gradient(to right top, rgb(255, 215, 133), rgb(31, 128, 104));
@@ -387,13 +402,16 @@ p {
     width: 100%;
     padding: 0 20px 0 100px;
     text-align: left;
-}
+} */
 
 /*****************************************************************************/
 /* TESTIMONIALS */
 
 #testimonials {
 	padding: 50px 0;
+	/* background-color: #6696d2; */
+	background-image: linear-gradient(to right top, rgb(9, 69, 135), rgb(58, 220, 220));
+	color: white;
 }
 #testimonials h3 {
 	margin-bottom: 20px;
@@ -435,6 +453,10 @@ p {
 	margin-top: 20px;
 }
 
+#team img.advisor {
+	max-height: 130px;
+}
+
 /*****************************************************************************/
 /* NEWS */
 
@@ -451,7 +473,7 @@ p {
 #news .btn.btn-sm {
 	width: 160px;
 }
-#news img.post-image {
+#news .post-image img {
 	max-width: 100%;
 }
 #news .event-box {
@@ -460,24 +482,36 @@ p {
 	text-align: center;
 	color: white;
 }
+#news a.box-link {
+	text-decoration: none;
+}
 
 /*****************************************************************************/
 /* HIRE ME */
 
 #hire-me {
-	padding: 50px 0;
+	padding: 60px 0;
 	/* background-color: #f9f9f9; */
 	background-color: #465052;
+	background-image: url(/static/images/darker-office.jpg);
+	background-position: center center;
+	background-size: cover;
+	color: white;
 }
+
 #hire-me .btn.btn-lg {
-	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+#hire-me .btn-outline-light:hover {
+	color: #007aff;
 }
 
 /*****************************************************************************/
 /* FOOTER */
 
 #footer {
-	padding: 50px 0;
-	background-color: #f1f1f1;
-	background-color: #465052;
+	padding: 30px 0;
+	background-color: #f7f7f7;
+	/* background-color: #262929; */
 }
