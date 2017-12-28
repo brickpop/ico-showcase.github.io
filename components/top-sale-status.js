@@ -394,8 +394,8 @@ export default class extends React.Component {
 					<div className="row text-center">
 						<div className="col-md-6 offset-md-3 col-sm-10 offset-sm-1">
 							<h1>Token Sale Demo ICO</h1>
-							<h5>You are visiting an example of an ICO Token Sale developed by @ledfusion. </h5>
-							<h5>While you are watching this site, hundreds of investors may be funding the project next to you.</h5>
+							<h5>You are visiting an example of an ICO Token Sale developed by @ledfusion </h5>
+							<h5>While you are watching this site, hundreds of investors around the world are investing more money than early stage venture capital</h5>
 						</div>
 					</div>
 
@@ -421,6 +421,10 @@ export default class extends React.Component {
 					}
 
 					{this.fundingSection()}
+
+					<div className="text-center">
+						<p style={{marginTop: 10}}>You can buy Test Tokens using the Ropsten network</p>
+					</div>
 
 				</div>
 

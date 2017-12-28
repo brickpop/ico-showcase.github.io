@@ -31,14 +31,14 @@ export default class extends React.Component {
 							<div className="text-center">
 								<img src="/static/images/10.jpg" className="rounded-circle" />
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-								<h6>Mahatmas Ghandi</h6>
+								<h6>John Smith</h6>
 							</div>
 						</div>
 						<div className="slider-item">
 							<div className="text-center">
 								<img src="/static/images/11.jpg" className="rounded-circle" />
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-								<h6>Mahatmas Ghandi</h6>
+								<h6>Adam Smith</h6>
 							</div>
 						</div>
 					</Slider>
