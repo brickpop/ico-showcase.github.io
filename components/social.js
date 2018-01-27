@@ -18,28 +18,28 @@ export default class extends React.Component {
 						<div className="col-3">
 							<a href="https://www.twitter.com/twitter" target="_blank">
 								<div className="social-icon">
-									<i class="fa fa-twitter fa-3x"></i>
+									<i className="fa fa-twitter fa-3x"></i>
 								</div>
 							</a>
 						</div>
 						<div className="col-3">
 							<a href="https://www.facebook.com/facebook" target="_blank">
 								<div className="social-icon">
-									<i class="fa fa-facebook fa-3x"></i>
+									<i className="fa fa-facebook fa-3x"></i>
 								</div>
 							</a>
 						</div>
 						<div className="col-3">
 							<a href="https://t.me/telegram/" target="_blank">
 								<div className="social-icon">
-									<i class="fa fa-telegram fa-3x"></i>
+									<i className="fa fa-telegram fa-3x"></i>
 								</div>
 							</a>
 						</div>
 						<div className="col-3">
 							<a href="https://www.reddit.com/r/ethereum/" target="_blank">
 								<div className="social-icon">
-									<i class="fa fa-pinterest fa-3x"></i>
+									<i className="fa fa-pinterest fa-3x"></i>
 								</div>
 							</a>
 						</div>

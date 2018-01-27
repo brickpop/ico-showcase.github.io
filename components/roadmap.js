@@ -72,9 +72,7 @@ export default class extends React.Component {
 								</li>
 								<li className="timeline-inverted">
 									<div className="timeline-image">
-										<h4>Be Part
-                    <br />Of Our
-                    <br />Story!</h4>
+										<h4><br/>ICO</h4>
 									</div>
 								</li>
 							</ul>
