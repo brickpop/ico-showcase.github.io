@@ -11,7 +11,7 @@ export default class extends React.Component {
 					<div className="row text-center">
 						<div className="col-md-8 offset-md-2">
 							<h2>You can hire me</h2>
-							<p>If you are planning to run an ICO, don't just stand there. <br/>I am an experienced Senior Software Engineer and I can help you fund your next project. </p>
+							<p>If your next endeavour is running an ICO, don't just stand there. <br/>I am an experienced Senior Software Engineer and I can help you fund the next big thing. </p>
 						</div>
 					</div>
 

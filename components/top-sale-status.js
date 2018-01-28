@@ -416,7 +416,7 @@ export default class extends React.Component {
 							<h1>Token Sale Demo</h1>
 							<h5>While you are watching this site, hundreds of investors around the world are investing more money than early stage venture capital</h5>
 							<p>The site you are visiting is an ICO Demo developed by @ledfusion<br />
-								Demo transactions are run on the test net and the project data is fictional
+								Demo transactions are run on the test net and the project details are fictional
 							</p>
 							<p>To check the ICO, get test Ether at the <a id="faucet-link" target="_blank" href="https://faucet.metamask.io/">MetaMask Ether Faucet</a></p>
 						</div>

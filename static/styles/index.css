@@ -352,6 +352,9 @@ p {
 	border-radius: 100%;
 	background-color: #fed136;
 }
+.timeline>li .timeline-image:hover {
+	border: 7px solid #77a3cf;
+}
 .rounded-circle {
 	border-radius: 50%!important;
 }
@@ -372,8 +375,8 @@ p {
 			left: 50%;
 	}
 	.timeline>li {
-			min-height: 100px;
-			margin-bottom: 100px;
+			min-height: 70px;
+			margin-bottom: 70px;
 	}
 	.timeline>li .timeline-image {
     left: 50%;

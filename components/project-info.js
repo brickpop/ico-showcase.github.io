@@ -13,12 +13,12 @@ export default class extends React.Component {
 							<h3>Sample ICO</h3>
 							<p>This website is an example of a general purpose Token Sale, build on the Ethereum network.</p>
 							<p>Ethereum is the second largest crypto currency in the world. Unlike Bitcoin, it allows organizations to develop immutable, transparent and unstoppable applications that run on the blockchain.</p>
-							<p>An increasing number of projects is using Ethereum to create and exchange money (ether) with tokens. Depending on the case, token holders may have shares of a project, right to vote, participation on profits, etc.</p>
+							<p>An increasing number of projects is using Ethereum to create and exchange money (ether) with tokens. Depending on the case, token holders can get shares of a project, a tradeable asset, the right to vote, etc.</p>
 						</div>
 						<div className="col-md-7 text-center">
 							<a href="http://www.the-blockchain.com/docs/Ethereum_white_paper-a_next_generation_smart_contract_and_decentralized_application_platform-vitalik-buterin.pdf" target="_blank" className="btn btn-lg btn-outline-light">Read the White Paper</a>
-							<p>ICOs raise money without middlemen, such as venture capitalists and angel investors, which, even if they give you money, they also take a percentage of equity of the company, require a certain number of seats on the board of directors.</p>
-							<p>2017 was the year of the token sales boom. In November 2017, the total amount of capital raised has leapt to <strong>$3.6 billion</strong>. In fact, ICOs are now raising more money for start-ups than early stage venture capital.</p>
+							<p>ICOs raise money without middlemen, such as venture capitalists and angel investors. Even if they give you money, they also take a percentage of equity and even require a certain number of seats on the board of directors.</p>
+							<p>2017 was the year of the token sales boom. In November 2017, the total amount of capital raised had leapt to <strong>$3.6 billion</strong>. In fact, ICOs are now raising more money for start-ups than early stage venture capital.</p>
 						</div>
 					</div>
 
