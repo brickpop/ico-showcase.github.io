@@ -21,7 +21,7 @@ export default class extends React.Component {
 						<div className="col-md-4">
 							<img src="http://via.placeholder.com/80x80" className="rounded-circle" />
 							<h5>Eye candy</h5>
-							<p>Users facing an engaging and attractive web site are much more likely to invest on a project. Let yours shine.</p>
+							<p>Users visiting an engaging and attractive web site are much more likely to invest in a project. Like yours.</p>
 						</div>
 					</div>
 
