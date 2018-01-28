@@ -12,7 +12,7 @@ export default class extends React.Component {
 						<div className="col-md-5">
 							<h3>Specs</h3>
 							<p>
-							The price during the ICO will depend on the total number of tokens issued during the ICO according to the table below:
+							The price during the ICO will depend on the total number of tokens issued, according to the table below:
 							</p>
 							<table className="table table-striped table-responsive">
 								<thead>
