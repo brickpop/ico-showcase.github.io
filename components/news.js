@@ -43,7 +43,7 @@ export default class extends React.Component {
 										<div className="event-box rounded">
 											<h6>14</h6>
 											<h5>Jun</h5>
-											<p>2017</p>
+											<p>{new Date().getFullYear()}</p>
 										</div>
 									</a>
 								</div>
@@ -60,7 +60,7 @@ export default class extends React.Component {
 										<div className="event-box rounded">
 											<h6>17</h6>
 											<h5>Jun</h5>
-											<p>2017</p>
+											<p>{new Date().getFullYear()}</p>
 										</div>
 									</a>
 								</div>

@@ -22,7 +22,7 @@ export default class extends React.Component {
 											<h3>Core development</h3>
 										</div>
 										<div className="timeline-body">
-											<p className="text-muted">Develop the minimum viable product, release the first SDK and implement the initial IT infrastructure.</p>
+											<p className="text-muted">Develop the minimum viable product, release the first version of the SDK and deploy the initial IT infrastructure.</p>
 										</div>
 									</div>
 								</li>
@@ -35,7 +35,7 @@ export default class extends React.Component {
 											<h3>External auditing</h3>
 										</div>
 										<div className="timeline-body">
-											<p className="text-muted">Our core systems and smart contracts will be audited by three of the most respected blockchain engineers. At the same time, the core system will be open sourced.</p>
+											<p className="text-muted">Core systems and smart contracts audited by three of the most respected blockchain engineers. At the same time, the core system is open sourced to the community.</p>
 										</div>
 									</div>
 								</li>
@@ -71,7 +71,7 @@ export default class extends React.Component {
 									</div>
 									<div className="timeline-panel">
 										<div className="timeline-heading">
-											<h3>Launch of the Exchange</h3>
+											<h3>Exchange listing</h3>
 										</div>
 										<div className="timeline-body">
 											<p className="text-muted">Full details will be disclosed at the right time. However, an agreement is already made with two of the five major exchanges as of today.</p>

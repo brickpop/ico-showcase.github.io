@@ -89,6 +89,9 @@ p {
 #top-status h6 {
 	line-height: 22px;
 }
+#top-status h6.dropdown-header {
+	color: #868e96;
+}
 #top-status h5, #top-status p {
 	margin-bottom: 14px;
 	font-weight: 300;
@@ -271,6 +274,10 @@ p {
 	margin-bottom: 30px;
 }
 
+#project-features img.rounded-circle {
+	max-height: 80px;
+}
+
 /*****************************************************************************/
 /* PROJECT FEATURES */
 
@@ -385,7 +392,7 @@ p {
 	}
 	.timeline>li {
 		min-height: 70px;
-		margin-bottom: 70px;
+		margin-bottom: 20px;
 	}
 	.timeline>li .timeline-image {
 		left: 50%;
@@ -470,6 +477,30 @@ p {
 }
 #team h5 {
 	margin-top: 20px;
+}
+
+#team .list-inline-item:not(:last-child) {
+	margin-right: 20px;
+}
+#team ul.social-buttons li a {
+	font-size: 20px;
+	line-height: 40px;
+	display: block;
+	width: 40px;
+	height: 40px;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	transition: all .3s;
+	color: #fff;
+	border-radius: 100%;
+	outline: 0;
+	background-color: #a8adb2;
+}
+#team ul.social-buttons li a:hover {
+	background-color: #cfd5db;
+}
+#team .row.text-center > div > p {
+	color: rgb(129, 125, 125);
 }
 
 #team img {
