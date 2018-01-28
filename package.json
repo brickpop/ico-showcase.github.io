@@ -4,6 +4,7 @@
   "description": "This page is a sample ICO",
   "main": "index.js",
   "scripts": {
+    "postinstall": "cp node_modules/antd/dist/antd.min.css static/",
     "dev": "next -p 8080",
     "build": "next build",
     "export": "next build && next export",
@@ -19,6 +20,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/ledfusion/sample-token-sale#readme",
   "dependencies": {
+    "antd": "^3.1.5",
     "axios": "^0.17.1",
     "bluebird": "^3.5.1",
     "next": "^4.1.4",
@@ -26,7 +28,6 @@
     "react-countup": "^3.0.2",
     "react-dom": "^16.1.1",
     "react-particles-js": "^2.1.0",
-    "react-slick": "^0.15.4",
     "reactstrap": "^5.0.0-alpha.4",
     "web3-wrap": "^0.9.5"
   },

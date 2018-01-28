@@ -1,21 +1,10 @@
 import React from 'react'
-import Slider from 'react-slick';
-
+import { Carousel } from 'antd';
 
 export default class extends React.Component {
 	state = {};
 
 	render() {
-		var settings = {
-			dots: true,
-			infinite: true,
-			speed: 500,
-			slidesToShow: 1,
-			slidesToScroll: 1,
-			nextArrow: null,
-			prevArrow: null
-			// fade: true
-		};
 		return (
 			<div id="testimonials">
 				<div className="container">
@@ -26,7 +15,7 @@ export default class extends React.Component {
 						</div>
 					</div>
 
-					<Slider {...settings}>
+					<Carousel autoplay>
 						<div className="slider-item">
 							<div className="text-center">
 								<img src="/static/images/10.jpg" className="rounded-circle" />
@@ -41,7 +30,7 @@ export default class extends React.Component {
 								<h6>Adam Smith</h6>
 							</div>
 						</div>
-					</Slider>
+					</Carousel>
 
 				</div>
 			</div>
