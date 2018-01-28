@@ -18,7 +18,7 @@ export default class extends React.Component {
 						<div className="col-md-7 text-center">
 							<a href="http://www.the-blockchain.com/docs/Ethereum_white_paper-a_next_generation_smart_contract_and_decentralized_application_platform-vitalik-buterin.pdf" target="_blank" className="btn btn-lg btn-outline-light">Read the White Paper</a>
 							<p>ICOs raise money without middlemen, such as venture capitalists and angel investors, which, even if they give you money, they also take a percentage of equity of the company, require a certain number of seats on the board of directors.</p>
-							<p>2017 has been the year of the token sales boom. In November 2017, the total amount of capital raised has leapt to <strong>$3.6 billion</strong>. In fact, ICOs are now raising more money for start-ups than early stage venture capital.</p>
+							<p>2017 was the year of the token sales boom. In November 2017, the total amount of capital raised has leapt to <strong>$3.6 billion</strong>. In fact, ICOs are now raising more money for start-ups than early stage venture capital.</p>
 						</div>
 					</div>
 

@@ -3,6 +3,7 @@ import * as Web3Wrap from "web3-wrap";
 import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Particles from 'react-particles-js';
 import CountUp from 'react-countup';
+import { message, notification } from "antd";
 
 import { Campaign, MiniMeToken } from "../contracts/build/token-sale.js";
 import { getEthUsdRate } from "../lib/api";
@@ -169,7 +170,7 @@ export default class extends React.Component {
 	submit() {
 		this.attachToContract();
 
-		if (this.state.investingValue <= 0) return alert("Please, enter a positive value");
+		if (this.state.investingValue <= 0) return message.error("Please, enter a positive value");
 
 		var amount;
 		if (this.state.inputCurrency == "ETH") {
@@ -182,6 +183,10 @@ export default class extends React.Component {
 			amount = this.state.investingValue / ethTokenRate;
 		}
 		amount = String(amount * 1000000000000000000);
+		if (amount.indexOf(".") >= 0) {
+			message.warning("The amount you entered may contain decimal numbers affected by truncation");
+			amount = amount.substr(0, amount.indexOf("."))
+		}
 
 		return Web3Wrap.getNetwork()
 			.then(name => {
@@ -196,12 +201,27 @@ export default class extends React.Component {
 				});
 			})
 			.then(result => {
-				console.log(result);
+				if (result && result.gasUsed) {
+					notification.success({
+						message: 'Success',
+						description: <p>
+							Congratulations! Your transaction has been mined and is now included in block <a href={`https://ropsten.etherscan.io/tx/${result.transactionHash}`} target="_blank">{result.blockNumber}</a>.<br />
+							<strong>You currently own {(this.state.tokenBalance / 1000000000000000000).toFixed(2)} Demo Tokens!</strong></p>,
+						duration: 0,
+					});
+				}
+				else {
+					message.error("There was an error while processing the transaction");
+				}
 
 				return this.updateSaleStatus();
 			})
 			.catch(err => {
-				alert(err.message);
+				notification.error({
+					message: 'Transaction error',
+					description: <p>{err.message}</p>,
+					duration: 0,
+				});
 			});
 	}
 
@@ -392,10 +412,13 @@ export default class extends React.Component {
 
 				<div className="container">
 					<div className="row text-center">
-						<div className="col-md-6 offset-md-3 col-sm-10 offset-sm-1">
-							<h1>Token Sale Demo ICO</h1>
-							<h5>You are visiting an example of an ICO Token Sale developed by @ledfusion </h5>
+						<div className="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+							<h1>Token Sale Demo</h1>
 							<h5>While you are watching this site, hundreds of investors around the world are investing more money than early stage venture capital</h5>
+							<p>The site you are visiting is an ICO Demo developed by @ledfusion<br />
+								Demo transactions are run on the test net and the project data is fictional
+							</p>
+							<p>To check the ICO, get test Ether at the <a id="faucet-link" target="_blank" href="https://faucet.metamask.io/">MetaMask Ether Faucet</a></p>
 						</div>
 					</div>
 
@@ -414,17 +437,13 @@ export default class extends React.Component {
 								<p>Raised</p>
 							</div>
 							<div className="col-4">
-								<h2><CountUp start={0} end={16} duration={1} /> days</h2>
+								<h2><CountUp start={0} end={16} duration={1} /> d</h2>
 								<p>Remaining</p>
 							</div>
 						</div> : <div className="row">&nbsp;</div>
 					}
 
 					{this.fundingSection()}
-
-					<div className="text-center">
-						<p style={{marginTop: 10}}>You can buy Test Tokens using the Ropsten network</p>
-					</div>
 
 				</div>
 
