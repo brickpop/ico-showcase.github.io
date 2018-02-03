@@ -3,7 +3,8 @@ import * as Web3Wrap from "web3-wrap";
 import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Particles from 'react-particles-js';
 import CountUp from 'react-countup';
-import { message, notification } from "antd";
+import { message, notification, Modal } from "antd";
+import { detect } from 'detect-browser';
 
 import { Campaign, MiniMeToken } from "../contracts/build/token-sale.js";
 import { getEthUsdRate } from "../lib/api";
@@ -14,7 +15,7 @@ const vaultAddress = "0x12CB28B5AEe07AA6305f77d73923Da2362b26E63";
 const targetNetwork = "ropsten";
 const ethTokenRate = 10;
 
-export default class extends React.Component {
+export default class TopSaleStatus extends React.Component {
 	state = {
 		error: "",
 		message: "",
@@ -36,6 +37,8 @@ export default class extends React.Component {
 		// - accounts
 		// - connected
 		// - network
+
+		// browserName
 	};
 
 	componentDidMount() {
@@ -63,11 +66,32 @@ export default class extends React.Component {
 			.catch(err => {
 				this.setError(err.message);
 			});
+
+		// browser detection
+		const browser = detect();
+		if (browser && browser.name) this.setState({ browserName: browser.name });
 	}
 
 	componentWillUnmount() {
 		clearInterval(this.updateInterval);
 		this.updateInterval = null;
+	}
+
+	showMetamaskInfo() {
+		Modal.info({
+			title: 'Installing MetaMask, your digital wallet',
+			style: {
+				width: 900
+			},
+			content: (
+				<div>
+					<p>To use the web site, you will need to install MetaMask, a digital wallet. You will need to put money in it to make your first purchase.</p>
+					<p>Note: A digital wallet like MetaMask acts like a bank account. Treat it with respect and make sure you don’t forget your password or the seed words.</p>
+					{/* <iframe width="560" height="315" src="https://www.youtube.com/embed/tfETpi-9ORs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> */}
+				</div>
+			),
+			onOk() { },
+		})
 	}
 
 	setError(message) {
@@ -309,7 +333,7 @@ export default class extends React.Component {
 		</div>
 	}
 
-	renderChromeReady() {
+	renderChromeFirefoxReady() {
 		return <div id="web3-available" className="row rounded">
 			<div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
 				<label>Token Sale address</label>
@@ -325,13 +349,9 @@ export default class extends React.Component {
 				<p>In order to launch your transaction, please, check one of these options:</p>
 
 				<div className="row text-center">
-					<div className="col-6">
-						<a href="https://metamask.io/" target="_blank" className="btn btn-block btn-outline-primary">Install Metamask<br />for Chrome</a>
-						<p><small><a href="#" className="text-muted">More info</a></small></p>
-					</div>
-					<div className="col-6">
-						<a href="https://www.myetherwallet.com/#send-transaction" target="_blank" className="btn btn-block btn-outline-success">Connect with <br />MyEtherwallet</a>
-						<p><small><a href="#" className="text-muted">More info</a></small></p>
+					<div className="col-md-6 offset-md-3 col-lg-8 offset-lg-2">
+						<a href="https://metamask.io/" target="_blank" className="btn btn-block btn-outline-info">Install Metamask<br />for Chrome</a>
+						<p><small><a href onClick={() => this.showMetamaskInfo()} className="text-muted">More info</a></small></p>
 					</div>
 				</div>
 			</div>
@@ -373,8 +393,14 @@ export default class extends React.Component {
 	fundingSection() {
 		if (this.state.loading) return this.renderMessage("Loading...");
 		else if (this.state.unsupported) {
-			if (window && !!window.chrome) return this.renderChromeReady()
-			else return this.renderUnsupportedBrowser();
+			switch (this.state.browserName) {
+				case "chrome":
+				case "firefox":
+					return this.renderChromeFirefoxReady();
+				default:
+					if (window && !!window.chrome) return this.renderChromeFirefoxReady();
+					else return this.renderUnsupportedBrowser();
+			}
 		}
 		else if (this.state.error) return this.renderMessage(this.state.error, "error");
 		else if (!this.state.connected) return this.renderMessage("Your connections seems to be down", "error");
@@ -416,7 +442,7 @@ export default class extends React.Component {
 							<h1>Token Sale Demo</h1>
 							<h5>While you are watching this site, hundreds of investors around the world are investing more money than early stage venture capital</h5>
 							<p>The site you are visiting is an ICO Demo developed by @ledfusion<br />
-								Demo transactions are run on the test net and the project details are fictional
+								Demo transactions are run on the test net and all project details are fictional
 							</p>
 							<p>To check the ICO, get test Ether at the <a id="faucet-link" target="_blank" href="https://faucet.metamask.io/">MetaMask Ether Faucet</a></p>
 						</div>

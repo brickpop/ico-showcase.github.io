@@ -205,7 +205,10 @@ p {
 
 #web3-available {
 	padding: 20px 0;
-	background-color: #fcfeec;
+	background-color: #fefff8;
+}
+#top-status #web3-available h6, #top-status #web3-available p {
+	color: #666;
 }
 #web3-available.btn {
 	cursor: pointer;

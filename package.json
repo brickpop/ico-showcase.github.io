@@ -23,6 +23,7 @@
     "antd": "^3.1.5",
     "axios": "^0.17.1",
     "bluebird": "^3.5.1",
+    "detect-browser": "^2.0.0",
     "email-validator": "^1.1.1",
     "next": "^4.1.4",
     "react": "^16.1.1",
@@ -33,6 +34,9 @@
     "web3-wrap": "^0.9.5"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.17.0",
+    "eslint-plugin-react": "^7.6.1",
     "eth-tx": "^0.9.6"
   }
 }
