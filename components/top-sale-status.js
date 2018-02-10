@@ -4,7 +4,7 @@ import { InputGroup, InputGroupButton, Input, Button, ButtonDropdown, DropdownTo
 import Particles from 'react-particles-js';
 import CountUp from 'react-countup';
 import { message, notification, Modal } from "antd";
-import { detect } from 'detect-browser';
+import bowser from 'bowser';
 
 import { Campaign, MiniMeToken } from "../contracts/build/token-sale.js";
 import { getEthUsdRate } from "../lib/api";
@@ -68,8 +68,12 @@ export default class TopSaleStatus extends React.Component {
 			});
 
 		// browser detection
-		const browser = detect();
-		if (browser && browser.name) this.setState({ browserName: browser.name });
+		const chrome = bowser.chrome;
+		const firefox = bowser.firefox;
+		const mobile = bowser.mobile;
+		const tablet = bowser.tablet;
+
+		this.setState({ chrome, firefox, mobile, tablet });
 	}
 
 	componentWillUnmount() {
@@ -361,31 +365,42 @@ export default class TopSaleStatus extends React.Component {
 	renderUnsupportedBrowser() {
 		return <div id="web3-missing" className="row rounded">
 			<div className="col-lg-8 offset-lg-2 col-md-10 offset-md-1 text-center">
-				<h6>Your browser is not compatible with Ethereum</h6>
-				<p>Please, check one of these options:</p>
+				<h6>Your browser is not yet compatible with Ethereum</h6>
+				<p>Please, check one of the following alternatives:</p>
 
 				<div className="row text-center">
 					<div className="col-md-3 col-sm-6">
-						<a href="#"><img src="http://via.placeholder.com/80x80" className="rounded-circle" /></a>
-						<h6>Chrome + Metamask</h6>
-						<p><small><a href="#" className="text-muted">More info</a></small></p>
+						<a href="https://metamask.io" target="_blank">
+							<img src="/static/logos/metamask.png" className="rounded-circle" />
+							<h6>Metamask for Chrome</h6>
+						</a>
+						{/* <p><small><a href="#" className="text-muted">More info</a></small></p> */}
 					</div>
 					<div className="col-md-3 col-sm-6">
-						<a href="#"><img src="http://via.placeholder.com/80x80" className="rounded-circle" /></a>
-						<h6>Ethereum Mist</h6>
-						<p><small><a href="#" className="text-muted">More info</a></small></p>
+						<a href="https://metamask.io" target="_blank">
+							<img src="/static/logos/metamask.png" className="rounded-circle" />
+							<h6>Metamask for Firefox</h6>
+						</a>
+						{/* <p><small><a href="#" className="text-muted">More info</a></small></p> */}
 					</div>
 					<div className="col-md-3 col-sm-6">
-						<a href="#"><img src="http://via.placeholder.com/80x80" className="rounded-circle" /></a>
-						<h6>Parity</h6>
-						<p><small><a href="#" className="text-muted">More info</a></small></p>
+						<a href="https://github.com/ethereum/mist/releases" target="_blank">
+							<img src="/static/logos/mist.png" className="rounded-circle" />
+							<h6>Ethereum Mist</h6>
+						</a>
+						{/* <p><small><a href="#" className="text-muted">More info</a></small></p> */}
 					</div>
 					<div className="col-md-3 col-sm-6">
-						<a href="#"><img src="http://via.placeholder.com/80x80" className="rounded-circle" /></a>
-						<h6>MyEtherWallet</h6>
-						<p><small><a href="#" className="text-muted">More info</a></small></p>
+						<a href="https://www.myetherwallet.com" target="_blank">
+							<img src="/static/logos/myetherwallet.png" className="rounded-circle" />
+							<h6>MyEtherWallet</h6>
+						</a>
+						{/* <p><small><a href="#" className="text-muted">More info</a></small></p> */}
 					</div>
 				</div>
+
+				<br />
+				<p><small><a href="https://www.cryptocompare.com/wallets/guides/how-to-use-metamask/" target="_blank" className="text-muted">Getting started with Metamask &rarr;</a></small></p>
 			</div>
 		</div>
 	}
@@ -393,14 +408,10 @@ export default class TopSaleStatus extends React.Component {
 	fundingSection() {
 		if (this.state.loading) return this.renderMessage("Loading...");
 		else if (this.state.unsupported) {
-			switch (this.state.browserName) {
-				case "chrome":
-				case "firefox":
-					return this.renderChromeFirefoxReady();
-				default:
-					if (window && !!window.chrome) return this.renderChromeFirefoxReady();
-					else return this.renderUnsupportedBrowser();
-			}
+			if ((this.state.chrome || this.state.firefox) && !this.state.tablet && !this.state.mobile)
+				return this.renderChromeFirefoxReady();
+			else
+				return this.renderUnsupportedBrowser();
 		}
 		else if (this.state.error) return this.renderMessage(this.state.error, "error");
 		else if (!this.state.connected) return this.renderMessage("Your connections seems to be down", "error");

@@ -214,9 +214,26 @@ p {
 	cursor: pointer;
 }
 
-#web3-missing {
+#top-status #web3-missing {
 	padding: 20px 0;
-	background-color: #fef9ec
+	background-color: #fef9ec;
+}
+
+#top-status #web3-missing p, #top-status #web3-missing h6 {
+	color: #666;
+}
+
+#top-status #web3-missing .col-md-3.col-sm-6 h6 {
+	margin-top: 15px;
+}
+
+#top-status #web3-missing .col-md-3.col-sm-6 img {
+	margin-top: 15px;
+	width: 80px;
+}
+
+#top-status #web3-missing .col-md-3.col-sm-6 a:hover {
+	text-decoration: none;
 }
 
 #top-status {
