@@ -81,23 +81,6 @@ export default class TopSaleStatus extends React.Component {
 		this.updateInterval = null;
 	}
 
-	showMetamaskInfo() {
-		Modal.info({
-			title: 'Installing MetaMask, your digital wallet',
-			style: {
-				width: 900
-			},
-			content: (
-				<div>
-					<p>To use the web site, you will need to install MetaMask, a digital wallet. You will need to put money in it to make your first purchase.</p>
-					<p>Note: A digital wallet like MetaMask acts like a bank account. Treat it with respect and make sure you don’t forget your password or the seed words.</p>
-					{/* <iframe width="560" height="315" src="https://www.youtube.com/embed/tfETpi-9ORs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> */}
-				</div>
-			),
-			onOk() { },
-		})
-	}
-
 	setError(message) {
 		this.setState({ error: message, loading: false });
 	}
@@ -349,13 +332,17 @@ export default class TopSaleStatus extends React.Component {
 				{/* <p className="text-center text-muted">You currently have a balance of 100 Tokens</p> */}
 
 				<hr />
-				<h6>Support for Ethereum</h6>
-				<p>In order to launch your transaction, please, check one of these options:</p>
 
 				<div className="row text-center">
 					<div className="col-md-6 offset-md-3 col-lg-8 offset-lg-2">
-						<a href="https://metamask.io/" target="_blank" className="btn btn-block btn-outline-info">Install Metamask<br />for Chrome</a>
-						<p><small><a href onClick={() => this.showMetamaskInfo()} className="text-muted">More info</a></small></p>
+				<p>In order to launch your transaction, you need to install the Metamask plugin:</p>
+						<a href="https://metamask.io" target="_blank">
+							<img src="/static/logos/metamask.png" />
+							<h6>Metamask for {this.state.chrome ? "Chrome" : "Firefox"}</h6>
+						</a>
+
+						<p><small><a href="https://www.cryptocompare.com/wallets/guides/how-to-use-metamask/" target="_blank" className="text-muted">Getting started with Metamask &rarr;</a></small></p>
+
 					</div>
 				</div>
 			</div>
@@ -371,31 +358,27 @@ export default class TopSaleStatus extends React.Component {
 				<div className="row text-center">
 					<div className="col-md-3 col-sm-6">
 						<a href="https://metamask.io" target="_blank">
-							<img src="/static/logos/metamask.png" className="rounded-circle" />
+							<img src="/static/logos/metamask.png" />
 							<h6>Metamask for Chrome</h6>
 						</a>
-						{/* <p><small><a href="#" className="text-muted">More info</a></small></p> */}
 					</div>
 					<div className="col-md-3 col-sm-6">
 						<a href="https://metamask.io" target="_blank">
-							<img src="/static/logos/metamask.png" className="rounded-circle" />
+							<img src="/static/logos/metamask.png" />
 							<h6>Metamask for Firefox</h6>
 						</a>
-						{/* <p><small><a href="#" className="text-muted">More info</a></small></p> */}
 					</div>
 					<div className="col-md-3 col-sm-6">
 						<a href="https://github.com/ethereum/mist/releases" target="_blank">
-							<img src="/static/logos/mist.png" className="rounded-circle" />
+							<img src="/static/logos/mist.png" />
 							<h6>Ethereum Mist</h6>
 						</a>
-						{/* <p><small><a href="#" className="text-muted">More info</a></small></p> */}
 					</div>
 					<div className="col-md-3 col-sm-6">
 						<a href="https://www.myetherwallet.com" target="_blank">
-							<img src="/static/logos/myetherwallet.png" className="rounded-circle" />
+							<img src="/static/logos/myetherwallet.png" />
 							<h6>MyEtherWallet</h6>
 						</a>
-						{/* <p><small><a href="#" className="text-muted">More info</a></small></p> */}
 					</div>
 				</div>
 
@@ -455,7 +438,7 @@ export default class TopSaleStatus extends React.Component {
 							<p>The site you are visiting is an ICO Demo developed by @ledfusion<br />
 								Demo transactions are run on the test net and all project details are fictional
 							</p>
-							<p>To check the ICO, get test Ether at the <a id="faucet-link" target="_blank" href="https://faucet.metamask.io/">MetaMask Ether Faucet</a></p>
+							<p>To check the ICO, get some test Ether at the <a id="faucet-link" target="_blank" href="https://faucet.metamask.io/">MetaMask Ether Faucet</a></p>
 						</div>
 					</div>
 

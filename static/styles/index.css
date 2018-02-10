@@ -210,13 +210,18 @@ p {
 #top-status #web3-available h6, #top-status #web3-available p {
 	color: #666;
 }
-#web3-available.btn {
-	cursor: pointer;
+#top-status #web3-available img {
+	margin-top: 5px;
+	width: 100px;
+}
+
+#top-status #web3-available a:hover {
+	text-decoration: none;
 }
 
 #top-status #web3-missing {
 	padding: 20px 0;
-	background-color: #fef9ec;
+	background-color: #fefff8;
 }
 
 #top-status #web3-missing p, #top-status #web3-missing h6 {
