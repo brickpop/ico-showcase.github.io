@@ -250,7 +250,7 @@ p {
 
 #social {
 	padding: 50px 0 25px;
-	background-color: #f3f8fc;
+	background-color: #f3fcf7;
 }
 #social h5 {
 	margin-bottom: 40px;
@@ -263,13 +263,29 @@ p {
 }
 
 #social .social-icon {
-	background-color: #3a8692;
+	/* background-color: #3a8692; */
 	color: white;
 	width: 5em;
 	height: 5em;
 	padding: 1em;
 	margin: auto;
 	border-radius: 50%;
+}
+#social .social-icon.tw {
+	background-color: #3EA4EE;
+}
+#social .social-icon.fb {
+	background-color: #496CA8;
+}
+#social .social-icon.tg {
+	background-color: #439DD6;
+}
+#social .social-icon.pt {
+	background-color: #AF332C;
+}
+
+#social #subscribe {
+	margin-top: 60px;
 }
 
 /*****************************************************************************/

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class extends React.Component {
+export default class Social extends React.Component {
 	state = {};
 
 	render() {
@@ -10,35 +10,35 @@ export default class extends React.Component {
 
 					<div className="row text-center">
 						<div className="col">
-							<h5>Find us on the net:</h5>
+							<h5>You can find us on the net:</h5>
 						</div>
 					</div>
 
 					<div id="social-icons" className="row text-center">
 						<div className="col-3">
 							<a href="https://www.twitter.com/twitter" target="_blank">
-								<div className="social-icon">
+								<div className="social-icon tw">
 									<i className="fa fa-twitter fa-3x"></i>
 								</div>
 							</a>
 						</div>
 						<div className="col-3">
 							<a href="https://www.facebook.com/facebook" target="_blank">
-								<div className="social-icon">
+								<div className="social-icon fb">
 									<i className="fa fa-facebook fa-3x"></i>
 								</div>
 							</a>
 						</div>
 						<div className="col-3">
 							<a href="https://t.me/telegram/" target="_blank">
-								<div className="social-icon">
+								<div className="social-icon tg">
 									<i className="fa fa-telegram fa-3x"></i>
 								</div>
 							</a>
 						</div>
 						<div className="col-3">
 							<a href="https://www.reddit.com/r/ethereum/" target="_blank">
-								<div className="social-icon">
+								<div className="social-icon pt">
 									<i className="fa fa-pinterest fa-3x"></i>
 								</div>
 							</a>

@@ -18,7 +18,7 @@ const ContactForm = Form.create()(
 				onOk={onCreate}
 			>
 				<Form layout="vertical">
-					<p>To get in contact, please fill in the fields below and submit the form.</p>
+					<p>To get in contact, please fill in the fields below and submit the form. <br/>I will be glad to respond.</p>
 					<FormItem>
 						{getFieldDecorator('name', {
 							rules: [{ required: true, message: 'Please, let me have a name to greet you' }],
