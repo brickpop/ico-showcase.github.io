@@ -49,7 +49,6 @@ export default class Admin extends React.Component {
 	}
 
 	deployFactory() {
-		console.log();
 		console.log("Deploying MiniMeTokenFactory");
 		MiniMeTokenFactoryContract.deploy({}).then(tokenFactoryInstance => {
 			console.log("Deployed on", tokenFactoryInstance.$address);
