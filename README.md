@@ -1,52 +1,35 @@
 # Sample ICO #
 
-This page is a sample ICO
+This is the source code of a Sample Token Sale built on the Ethereum Ropsten network.
 
-### TO DO ###
+## Features ##
 
-* Funding box => afegir "Please wait, funding..."
+The current project is built on top of ReactJS and Next.js.
 
+The current stack allows to export the whole projecto into a static HTML/JS/CSS folder, so that the web application can be served from IPFS or Ethereum Swarm, where server interesaction is not possible.
 
+The project includes the source code of the web site and the Solidity Smart Contracts deployed to the Ropsten net.
 
-### COPY's
+## Get started ##
 
-* This website is an example of a general purpose Token Sale, build on the Ethereum network.
+In order to get started:
+* Clone the current branch and run `yarn` to install the dependencies.
+* Install the MetaMask extension in your browser
+* Run `npm run dev`
+* Open `http://localhost:8080`
 
-Ethereum is the second largest crypto currency in the world, and in contrast to Bitcoin, it allows organizations to develop immutable, transparent and unstoppable software.
+## Utilities ##
 
-An increasing number of projects is using Ethereum to create and exchange money (ether) with tokens. Depending on the case, token holders may have shares of a project, right to vote, participation on profits, etc.
+The `package.json` file provides several scripts to perform the most important tasks.
 
-2017 has been the year of the token sales boom. In November 2017, the total amount of capital raised has leapt to $3.6 billion. In fact, ICOs are now raising more money for start-ups than early stage venture capital.
+`npm run dev` will start the development server on `8080` and will reload the contents when a file is changed.
 
+`npm run build` will compile the project so that the production version can be served with `npm start`.
 
+`npm run export` will export a static standalone version of the project in the `out` folder.
 
-* What is a smart contract?
-A typical application will be running on a private server. It can be modified and brought down at any time.
+## About ##
 
-A Smart Contract is a special piece of software that is deployed to the blockchain. A smart contract has the ability to codify the terms of a trade into a publicly immutable auditable program.
+The current project is a work of @ledfusion.
 
-This enforces transparency, trust and certainty that an amount sent to smart contract will only be used as stated in the program code.
-
-In addition to this, Smart Contracts eliminate the costs of server infrastructure, as they only need a one-time fee to deploy to the blockchain.
-
-
-
-
-* Smart contracts you can trust
-** Solid rock Smart contracts
-** Unstoppable SC
-** Uncorruptible
-
-
-
-* Eye candy
-** Usability => The most important thing: invest
-** Guidance
-
-* DAPPS
-* Transparent
-* Auditable
-* Public
-* Flow
-* Swarm/IPFS
-* Whisper
+You can have a look at a live version at [https://ledfusion.github.io/](https://ledfusion.github.io/)

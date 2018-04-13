@@ -18,7 +18,7 @@ const TvrboTokenSaleContract = wrapContract(
 );
 var tokenFactoryInstance, tokenInstance, tvrboTokenSaleInstance;
 
-export default class extends React.Component {
+export default class Admin extends React.Component {
 	state = {
 		accounts: [],
 		tokenFactoryAddress: "0xf50a358e09b1dbb2855e06bb931b77f62fd44100",
