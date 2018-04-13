@@ -1,7 +1,7 @@
 {
   "name": "sample-token-sale",
   "version": "1.0.0",
-  "description": "This page is a sample ICO",
+  "description": "This project is a Sample Token Sale",
   "main": "index.js",
   "scripts": {
     "postinstall": "cp node_modules/antd/dist/antd.min.css static/",
@@ -11,32 +11,28 @@
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/ledfusion/sample-token-sale.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "homepage": "https://bitbucket.org/ledfusion/sample-token-sale#readme",
   "dependencies": {
-    "antd": "^3.1.5",
-    "axios": "^0.17.1",
+    "antd": "^3.4.1",
+    "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "bowser": "^1.9.2",
     "email-validator": "^1.1.1",
     "next": "^4.1.4",
-    "react": "^16.1.1",
+    "react": "^16.3.1",
     "react-countup": "^3.0.2",
-    "react-dom": "^16.1.1",
+    "react-dom": "^16.3.1",
     "react-particles-js": "^2.1.0",
-    "reactstrap": "^5.0.0-alpha.4",
-    "web3-wrap": "^0.9.5"
+    "reactstrap": "^5.0.0",
+    "web3-wrap": "^0.9.6"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "eslint": "^4.17.0",
     "eslint-plugin-react": "^7.6.1",
-    "eth-tx": "^0.9.6"
+    "eth-tx": "^0.9.7"
   }
 }
